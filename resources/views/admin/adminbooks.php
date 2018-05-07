@@ -1,31 +1,6 @@
 <?php echo View::make('layouts.BooksLayout'); ?>
 <?php echo View::make('datatable.DataTableLib'); ?>
-<style>
 
-    table.dataTable td {
-
-        text-align: center;
-    }
-
-    /*massge on column hover*/
-    .message {
-        display: none;
-        color: #000;
-        background: #999;
-        position: absolute;
-        top: 10px;
-    }
-
-    th {
-        position: relative;
-    }
-
-    .anchor:hover + .message {
-        display: block !important;
-        z-index: 10;
-    }
-
-</style>
 
 <div class="container">
     <div class="table-wrapper">

@@ -561,7 +561,8 @@
 
 <!-- Buy Book Modal HTML (BootStrap Model for Buy Book) -->
 
-<div id="bookBuyModal" class="modal fade" tabindex="-1">
+
+<div id="BookBuyModal" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <form method="post" action="/buybook">
@@ -574,8 +575,6 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Book Details</label><br><br>
-                        <!--                         <input type="checkbox"  required>Percentage<br>-->
-                        <!--                     <input type="checkbox"  required>   Fixed Amount<br><br>-->
                         <label class="custom-control custom-checkbox">
                             <span >BOOK-ID</span>  <input type="number" name="book_id" id="book_id"  readonly>
                         </label><br><br>
@@ -589,7 +588,7 @@
                         <label><b>Book Quantity</label>
 
 
-                        <input type="number" id="mbook_quantity" name="mbook_quantity"  oninput="stoppedTyping()"  onchange="maxStoppedTyping()" class="form-control"  required>
+                        <input type="number" id="model_book_quantity" name="model_book_quantity"  oninput="disableBuyButton()"  onchange="disableBuyButtonHighQty()" class="form-control"  required>
                     </div>
 
                 </div>
@@ -597,7 +596,7 @@
                     <input type="button" class="btn btn-default" data-dismiss="modal"  value="Cancel">
 
 
-                    <input type="submit" class="btn btn-info" name='mbook_buy' id='mbook_buy' onmouseover ="stoppedTyping()"  value="Buy NOW !">
+                    <input type="submit" class="btn btn-info" name='model_book_buy' id='model_book_buy' onmouseover ="disableBuyButton()"  value="Buy NOW !">
                 </div>
             </form>
         </div>
