@@ -23,7 +23,10 @@ class BookShopLib
     {
         $saveBooks = Book::create(request()->all());
 
-          return $saveBooks;
+           if ($saveBooks)
+           {
++                return redirect('/adminbooks');
++            }
     }
     // method to DELETE Book.
     public function bookdelete(Request $request)
