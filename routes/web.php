@@ -14,3 +14,24 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Admin Book View Page.
+Route::get('adminbooks','BooksController@adminbooks');
+//NEW BOOk DATA  -- for STORE NEW Book INFO BY ADMIN.
+Route::post('/newbook','BooksController@storeNewBook');
+//Book DELETE.
+Route::post('/bookdelete','BooksController@bookdelete');
+
+//Book  UPDATE data
+Route::post('/bookupdate','BooksController@bookUpdate');
+
+
+//USER Book View Page.
+Route::get('userbooks','BooksController@userbooks');
+
+
+//BUY Book.
+Route::post('buybook','BuyBookController@storeBookAfterBuy');
+
+//USER VIEW BookS AFTER BUY View Page.
+Route::get('buydbooks','BuyBookController@viewBooksAfterBuy');

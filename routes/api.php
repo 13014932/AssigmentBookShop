@@ -16,3 +16,5 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+// gives data to adminbooks page.
+Route::get('/BookApi', 'BooksAPIController@getBooks')->name('books');
