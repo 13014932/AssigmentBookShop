@@ -34,10 +34,8 @@ class BooksController extends Controller
     {
         try {
             $data = new BookShopLib();
-            $store = $data->storeNewBook();
-            if ($store){
-                return redirect('/adminbooks');
-            }
+            $store = $data->storeNewBook($request);
+           return $store;
         }
 
         catch (\Exception $exception) {
