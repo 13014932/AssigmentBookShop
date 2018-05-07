@@ -426,7 +426,7 @@
 <div id="viewBookModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="post" action="mybooks">
+            <form method="post" action="viewbook">
                 <div class="modal-header">
                     <h4 class="modal-title">View Current Book</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -438,32 +438,32 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>book_id</label>
-                        <input type="text" name="vbook_id" id="vbook_id" class="form-control" readonly>
+                        <input type="text" name="book_view_id" id="book_view_id" class="form-control" readonly>
                     </div>
                     <div class="form-group">
                         <label>book_name</label>
-                        <input type="text" name="vbook_name" id="vbook_name" class="form-control" readonly>
+                        <input type="text" name="book_view_name" id="book_view_name" class="form-control" readonly>
                     </div>
                     <div class="form-group">
                         <label>price</label>
-                        <input type="number" name="vprice" id="vprice" class="form-control" readonly>
+                        <input type="number" name="book_view_price" id="book_view_price" class="form-control" readonly>
                     </div>
                     <div class="form-group">
                         <label>author_name</label>
-                        <input type="text" name="vauthor_name" id="vauthor_name" class="form-control" readonly>
+                        <input type="text" name="book_view_author_name" id="book_view_author_name" class="form-control" readonly>
                     </div>
                     <div class="form-group">
                         <label>special_price</label>
-                        <input type="number" name="vspecial_price" id="vspecial_price" class="form-control" readonly>
+                        <input type="number" name="book_view_special_price" id="book_view_special_price" class="form-control" readonly>
                     </div>
                     <div class="form-group">
                         <label>book_created_date</label>
-                        <input type="text" name="vbook_created_date" id="vbook_created_date" class="form-control"
+                        <input type="text" name="book_view_created_date" id="book_view_created_date" class="form-control"
                                readonly>
                     </div>
                     <div class="form-group">
                         <label>quantity</label>
-                        <input type="number" name="vquantity" id="vquantity" class="form-control" readonly>
+                        <input type="number" name="book_view_quantity" id="book_view_quantity" class="form-control" readonly>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -493,31 +493,31 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>book_id</label>
-                        <input type="text" name="ubook_id" id="ubook_id" class="form-control" readonly>
+                        <input type="text" name="update_book_id" id="update_book_id" class="form-control" readonly>
                     </div>
                     <div class="form-group">
                         <label>book_name</label>
-                        <input type="text" name="ubook_name" id="ubook_name" class="form-control">
+                        <input type="text" name="update_book_name" id="update_book_name" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>price</label>
-                        <input type="number" name="uprice" id="uprice" class="form-control">
+                        <input type="number" name="update_book_price" id="update_book_price" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>author_name</label>
-                        <input type="text" name="uauthor_name" id="uauthor_name" class="form-control">
+                        <input type="text" name="update_book_author_name" id="update_book_author_name" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>special_price</label>
-                        <input type="number" name="uspecial_price" id="uspecial_price" class="form-control">
+                        <input type="number" name="update_book_special_price" id="update_book_special_price" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>book_created_date</label>
-                        <input type="text" name="ubook_created_date" id="ubook_created_date" class="form-control">
+                        <input type="text" name="update_book_created_date" id="update_book_created_date" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>quantity</label>
-                        <input type="number" name="uquantity" id="uquantity" class="form-control">
+                        <input type="number" name="update_book_quantity" id="update_book_quantity" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -547,7 +547,7 @@
                     <p class="text-warning">
                         <small>This action cannot be undone.</small>
                     </p>
-                    <input type="hidden" id="vendor_del_id" name="vendor_del_id">
+                    <input type="hidden" id="book_del_id" name="book_del_id">
                 </div>
                 <div class="modal-footer">
 
