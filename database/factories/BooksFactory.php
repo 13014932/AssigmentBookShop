@@ -1,10 +1,10 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Models\Books;
+use App\Models\Book;
 
 
-$factory->define(App\Models\Books::class, function (Faker $faker)
+$factory->define(App\Models\Book::class, function (Faker $faker)
 
 {
 
