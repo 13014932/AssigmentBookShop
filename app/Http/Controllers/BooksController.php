@@ -70,9 +70,9 @@ class BooksController extends Controller
         try {
             $delBook = new BookShopLib();
             $delBook = $delBook->bookdelete($request);
-            if ($delBook) {
+            
                 return redirect('/adminbooks');
-            }
+            
         } catch (\Exception $e) {
             return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
@@ -105,15 +105,9 @@ class BooksController extends Controller
         }
 
     }
+    // method to return all Validation errors.
     public function errors()
     {
-        try {
-            view ('post.errors');
-            
-        } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-            
-        }
+        view ('post.errors');
     }
 }
