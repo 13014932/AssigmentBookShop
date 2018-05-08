@@ -43,11 +43,18 @@ class BookShopLib
                 return true;
             }
 
+<<<<<<< HEAD
         } catch (\Exception $e) {
             Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
             return false;
         }
+=======
+           if ($saveBooks)
+           {
++                return redirect('/adminbooks');
++            }
+>>>>>>> f48a358c62ccc61ef50cc91adaead58bfd3a7676
     }
 
     // method to DELETE Book.

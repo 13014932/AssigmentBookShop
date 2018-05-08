@@ -62,11 +62,16 @@ class BooksController extends Controller
 
             $data = new BookShopLib();
             $store = $data->storeNewBook($request);
+<<<<<<< HEAD
             if ($store) {
                 return redirect('/adminbooks');
             }
         } catch (\Exception $e) {
             Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+=======
+           return $store;
+        }
+>>>>>>> f48a358c62ccc61ef50cc91adaead58bfd3a7676
 
             return false;
         }
