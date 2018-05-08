@@ -14,16 +14,10 @@ class BookShopLib
     //Method Retrun User Books.
     public function getBooks()
     {
-        try {
-            $getbooks = Book::all();
-            if ($getbooks) {
-                return $getbooks;
-            }
-        } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-            return false;
-        }
+        
+             return Book::all()->toArray();
+        
+      
     }
 
     // method to store NEW BOOK data
@@ -39,22 +33,17 @@ class BookShopLib
             $saveBooks->book_created_date = $data->book_created_date;
             $saveBooks->quantity = $data->quantity;
 
-            if ($saveBooks->save()) {
-                return true;
-            }
+            $saveBooks->save();
+           return redirect('/adminbooks');
+            
 
-<<<<<<< HEAD
         } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+           return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
-            return false;
+           
         }
-=======
-           if ($saveBooks)
-           {
-+                return redirect('/adminbooks');
-+            }
->>>>>>> f48a358c62ccc61ef50cc91adaead58bfd3a7676
+
+
     }
 
     // method to DELETE Book.
@@ -63,13 +52,11 @@ class BookShopLib
         try {
             $delBook = Book::destroy($data->book_del_id);
 
-            if ($delBook) {
-                return $delBook;
-            }
+            return $delBook;
+            
         } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-            return false;
+            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+         
         }
     }
 
@@ -77,22 +64,20 @@ class BookShopLib
     public function bookUpdate($data)
     {
         try {
-            $bookUpdate = DB::table('books')
-//            ->where('product_title', $request->Product_Titlee)
-                ->where('id', $data->update_book_id)
-                ->update(['name' => $data->update_book_name, 'price' => $data->update_book_price,
-                    'author_name' => $data->update_book_author_name, 'special_price' => $data->update_book_special_price,
-                    'book_created_date' => $data->update_book_created_date,
-                    'quantity' => $data->update_book_quantity]);
-
-            if ($bookUpdate) {
-                return $bookUpdate;
-            }
-
+                     
+            $bookUpdate= Book::find($data('update_book_id'));
+            $bookUpdate->name = $data->update_book_name;
+            $bookUpdate->price = $data->update_book_price;
+            $bookUpdate->author_name = $data->update_book_author_name;
+            $bookUpdate->special_price = $data->update_book_special_price;
+            $bookUpdate->book_created_date = $data->update_book_created_date;
+            $bookUpdate->quantity = $data->update_book_quantity;
+        $bookUpdate->save();
+           
         } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
-            return false;
+          
         }
     }
 
@@ -100,24 +85,27 @@ class BookShopLib
     public function storeBookAfterBuy($data)
     {
         try {
-            $saveBook = Buybook::create($data()->all());
+            $saveBook = new Buybook;
 
-            if ($saveBook) {
+        $saveBook->book_id = $request->book_id;
+        $saveBook->book_price = $request->book_price;
+        $saveBook->quantity = $request->mbook_quantity;
+        
+        $saveBook->save();
+            
                 $data = Buybook::find($data->book_id);
                 $buydbook = $data->quantity;
-
-                $saveBook = DB::table('books')
-                    ->where('id', $data->book_id)
-                    ->update(['quantity' => $buydbook - ($data->mbook_quantity)]);
-
-                return $saveBook;
-
-            }
+                
+                $saveBookQtyUpdate=Book::find($data('book_id'));
+             $saveBookQtyUpdate->quantity = $buydbook - ($data->mbook_quantity);
+                $saveBookQtyUpdate->save();
+            
+          return redirect('/buydbooks');
 
         } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+           return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
-            return false;
+           
         }
 
 
@@ -127,16 +115,15 @@ class BookShopLib
     public function viewBooksAfterBuy()
     {
 
-        try {
-            $data = Buybook::all();
-            if ($data) {
-                return $data;
-            }
-        } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+        return Buybook::all()->toArray();
 
-            return false;
-        }
+
+    }
+    // Method to give book data to BookAPIController.
+    public function getAllBook()
+    {
+
+      return Book::select('id','name', 'price', 'special_price','author_name','book_created_date','quantity');
 
 
     }
