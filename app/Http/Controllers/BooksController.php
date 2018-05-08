@@ -13,16 +13,8 @@ class BooksController extends Controller
     // method to get adminbooks View.
     public function adminbooks()
     {
-        try {
-            $adminbooks = view('admin.adminbooks');
-            if ($adminbooks) {
-                return $adminbooks;
-            }
-        } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-            return false;
-        }
+          return view('admin.adminbooks');
+        
     }
 
     // method to get all books to user View page.
@@ -32,14 +24,13 @@ class BooksController extends Controller
         try {
             $data = new BookShopLib();
             $BookData = $data->getBooks();
-            if ($BookData) {
-                return view('user.userbooks', ['showdata' => $BookData]);
-            }
+           
+            return view('user.userbooks', ['showdata' => $BookData]);
+          
         } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+           return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
-            return false;
-        }
+             }
 
 
     }
@@ -62,20 +53,15 @@ class BooksController extends Controller
 
             $data = new BookShopLib();
             $store = $data->storeNewBook($request);
-<<<<<<< HEAD
-            if ($store) {
-                return redirect('/adminbooks');
-            }
+            
+            return redirect('/adminbooks');
+
         } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-=======
-           return $store;
-        }
->>>>>>> f48a358c62ccc61ef50cc91adaead58bfd3a7676
-
-            return false;
+             return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+           
         }
 
+           
     }
 
     // method to DELETE Book.
@@ -88,10 +74,9 @@ class BooksController extends Controller
                 return redirect('/adminbooks');
             }
         } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
-            return false;
-        }
+            }
     }
 
     //method to UPDATE Book  Data.
@@ -111,27 +96,24 @@ class BooksController extends Controller
         try {
             $bookUpdate = new BookShopLib();
             $bookUpdate = $bookUpdate->bookUpdate($request);
-            if ($bookUpdate) {
+            
                 return redirect('/adminbooks');
-            }
+            
         } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-            return false;
+           return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+          
         }
 
     }
     public function errors()
     {
         try {
-            $adminerror = view('post.errors');
-            if ($adminerror) {
-                return $adminerror;
-            }
+            view ('post.errors');
+            
         } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
-            return false;
+            
         }
     }
 }
