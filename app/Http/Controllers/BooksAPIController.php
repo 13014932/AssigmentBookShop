@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
-
+use App\Lib\BookShopLib;
 use Illuminate\Support\Facades\Log;
 
 
@@ -14,9 +13,10 @@ class BooksAPIController extends Controller
     {
         try
         {
-            $query = Book::select('id','name', 'price', 'special_price','author_name','book_created_date','quantity');
+            $data = new BookShopLib();
+            $BooksData = $data->getAllBook();
            
-                return datatables($query)->make(true);
+                return datatables($BooksData)->make(true);
             
 
         }
