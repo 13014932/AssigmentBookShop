@@ -35,3 +35,6 @@ Route::post('buybook','BuyBookController@storeBookAfterBuy');
 
 //USER VIEW BookS AFTER BUY View Page.
 Route::get('buydbooks','BuyBookController@viewBooksAfterBuy');
+
+//Admin Book View Page errors.
+Route::get('errors','BooksController@errors');

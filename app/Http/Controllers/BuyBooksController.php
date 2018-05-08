@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Lib\BookShopLib;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
- use App\Models\Buybook;
-use App\Models\Book;
+
+
 class BuyBooksController extends Controller
 {
     // Method to store BOOK AFTER BUY.
@@ -12,36 +14,35 @@ class BuyBooksController extends Controller
     {
         try {
             $data = new BookShopLib();
-            $store = $data->storeBookAfterBuy();
+            $store = $data->storeBookAfterBuy($request);
 
-            if ($store){
+            if ($store) {
                 return redirect('/buydbooks');
             }
         }
+        catch (\Exception $e) {
+            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
-        catch (\Exception $exception) {
-
-            Log::info($exception->getMessage());
+            return false;
         }
-
 
     }
 
 // Method to VIEW BOOK AFTER BUY.
-    public function viewBooksAfterBuy() {
+    public function viewBooksAfterBuy()
+    {
 
         try {
             $data = new BookShopLib();
             $data = $data->viewBooksAfterBuy();
 
-            if ($data){
-                return view('Buydbooks',['buydbooks' => $data]);
+            if ($data) {
+                return view('Buydbooks', ['buydbooks' => $data]);
             }
-        }
+        } catch (\Exception $e) {
+            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
-        catch (\Exception $exception) {
-
-            Log::info($exception->getMessage());
+            return false;
         }
 
 
