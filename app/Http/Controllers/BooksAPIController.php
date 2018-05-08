@@ -15,16 +15,15 @@ class BooksAPIController extends Controller
         try
         {
             $query = Book::select('id','name', 'price', 'special_price','author_name','book_created_date','quantity');
-            if ($query)
-            {
+           
                 return datatables($query)->make(true);
-            }
+            
 
         }
         catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
-            return false;
+         
         }
 
 
