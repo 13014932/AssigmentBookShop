@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Crud;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BuyBook extends Model
+class Book extends Model
 {
     //
 }

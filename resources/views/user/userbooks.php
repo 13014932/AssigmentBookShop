@@ -1,9 +1,9 @@
-
+<?php echo View::make('layouts.app'); ?>
 <?php echo View::make('layouts.BootStrapTable'); ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    function stoppedBuysss(){
+    function stoppedBuyssds(){
         if(document.getElementById('book_quantity').value <= 0)
         {
             $('button[id^="book_buy"]').prop('disabled', true);
@@ -24,25 +24,25 @@
 
     }
 
-    function stoppedTyping(){
+    function disableBuyButton(){
 
-        if(document.getElementById('mbook_quantity').value <= 0) {
-            document.getElementById('mbook_buy').disabled =true;
+        if(document.getElementById('model_book_quantity').value <= 0) {
+            document.getElementById('model_book_buy').disabled =true;
         } else {
-            document.getElementById('mbook_buy').disabled =false;
+            document.getElementById('model_book_buy').disabled =false;
         }
     }
-    function maxStoppedTyping(){
+    function disableBuyButtonHighQty(){
 
         var temp =document.getElementById('book_temp_qty').value;
 
 
-        if(document.getElementById('mbook_quantity').value > temp) {
+        if(document.getElementById('model_book_quantity').value > temp) {
             alert('Book Quantity Not Greater Then => ' + temp);
-            document.getElementById('mbook_buy').disabled =true;
+            document.getElementById('model_book_buy').disabled =true;
         }
         else {
-            document.getElementById('mbook_buy').disabled =false;
+            document.getElementById('model_book_buy').disabled =false;
         }
     }
 </script>
@@ -78,7 +78,7 @@
     }
 
 </style>
-<body onload="stoppedBuy()">
+<body onload="stoppedBuysss()">
 <div class="container">
     <div class="table-wrapper">
         <div class="table-title">
@@ -130,16 +130,16 @@
 
 
 
-                echo "<tr><td class='space'>" . $book->id . "</td>";
-                echo "<td class='space' >". $book->name . "</td>";
-                echo "<td class='space'>" . $book->price . "</td>";
-                echo "<td class='space'>" . $book->special_price . "</td>";
-                echo "<td class='space'>" . $book->author_name . "</td>";
-                echo "<td class='space'>" . $book->book_created_date . "</td>";
-                echo "<td class='space'>" ."<input type=\"text\" value=\"$book->quantity\"  id=\"book_quantity\" name=\"book_quantity\" class=\"qtydisable\" readonly>". "</td>";
+                echo "<tr><td class='space'>" . $book['id'] . "</td>";
+                echo "<td class='space' >". $book['name'] . "</td>";
+                echo "<td class='space'>" . $book['price'] . "</td>";
+                echo "<td class='space'>" . $book['special_price']. "</td>";
+                echo "<td class='space'>" . $book['author_name'] . "</td>";
+                echo "<td class='space'>" . $book['book_created_date'] . "</td>";
+                echo "<td class='space'>" ."<input type=\"text\" value=".$book['quantity']."  id=\"book_quantity\" name=\"book_quantity\" class=\"qtydisable\" readonly>". "</td>";
 
 
-                echo "<td class='space'>" ."  "." "." <a href=\"#BookBuyModal\"   onclick='bookDetail($book->id,$book->price,$book->quantity)' data-toggle=\"modal\"><button  name='book_buy' id='book_buy' type=\"button\" >BUY BOOK</button></a> ". "</td>";
+                echo "<td class='space'>" ."  "." "." <a href=\"#BookBuyModal\"   onclick='bookDetail($book[id],$book[price],$book[quantity])' data-toggle=\"modal\"><button  name='book_buy' id='book_buy' type=\"button\" >BUY BOOK</button></a> ". "</td>";
 
 
 
@@ -158,14 +158,15 @@
     function bookDetail(id,price,quantity) {
         $("#book_id").val(id);
         $("#book_price").val(price);
-        $("#mbook_quantity").val(quantity);
+        $("#model_book_quantity").val(quantity);
         $("#book_temp_qty").val(quantity);
 
     }
 
 </script>
 
-<!-- Edit Vendor Split Modal HTML -->
+<!-- Buy Book Modal HTML (BootStrap Model for Buy Book) -->
+
 
 <div id="BookBuyModal" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
@@ -180,8 +181,6 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Book Details</label><br><br>
-                        <!--                         <input type="checkbox"  required>Percentage<br>-->
-                        <!--                     <input type="checkbox"  required>   Fixed Amount<br><br>-->
                         <label class="custom-control custom-checkbox">
                             <span >BOOK-ID</span>  <input type="number" name="book_id" id="book_id"  readonly>
                         </label><br><br>
@@ -195,7 +194,7 @@
                         <label><b>Book Quantity</label>
 
 
-                        <input type="number" id="mbook_quantity" name="mbook_quantity"  oninput="stoppedTyping()"  onchange="maxStoppedTyping()" class="form-control"  required>
+                        <input type="number" id="model_book_quantity" name="model_book_quantity"  oninput="disableBuyButton()"  onchange="disableBuyButtonHighQty()" class="form-control"  required>
                     </div>
 
                 </div>
@@ -203,11 +202,12 @@
                     <input type="button" class="btn btn-default" data-dismiss="modal"  value="Cancel">
 
 
-                    <input type="submit" class="btn btn-info" name='mbook_buy' id='mbook_buy' onmouseover ="stoppedTyping()"  value="Buy NOW !">
+                    <input type="submit" class="btn btn-info" name='model_book_buy' id='model_book_buy' onmouseover ="disableBuyButton()"  value="Buy NOW !">
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 
 </body>
