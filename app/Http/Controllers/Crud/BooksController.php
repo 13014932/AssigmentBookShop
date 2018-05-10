@@ -41,7 +41,7 @@ class BooksController extends Controller
     public function storeNewBook(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'book_name' => 'required|max:6',
+            'book_name' => 'required|max:8',
             'book_created_date' => 'required|date'
 
         ]);
@@ -85,8 +85,8 @@ class BooksController extends Controller
     public function bookUpdate(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'update_book_name' => 'required|max:6',
-            'update_book_created_date' => 'required|date'
+            'name' => 'required|max:8',
+            'book_created_date' => 'required|date'
 
         ]);
         if ($validator->fails()) {

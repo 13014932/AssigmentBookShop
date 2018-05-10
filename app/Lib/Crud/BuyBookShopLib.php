@@ -9,7 +9,7 @@
 namespace App\Lib\Crud;
 
 use App\Models\Crud\BuyBook;
-use App\Models\Crud\Book;
+
 
 class BuyBookShopLib
 {
@@ -26,16 +26,18 @@ class BuyBookShopLib
 
             $saveBook->save();
 // SUBTRACT  the buying quantity from BOOKS table.
-            $saveBooks = Book::find($data->book_id);
 
-            $buydbook = $saveBooks->quantity;
+            $buyedbook=$data->model_book_quantity;
+            $book_id=$data->book_id;
 
+            $book = new BookShopLib();
+            $saveBook = $book->subtractBookQuantity($book_id);
+            $bookqty = $saveBook->quantity;
 //            dd($buydbook);
 
-            $saveBooks->quantity = $buydbook - ($data->model_book_quantity);
+            $saveBook->quantity = $bookqty - ($buyedbook);
 
-
-            return $saveBooks->save();
+            return $saveBook->save();
 
 
         } catch (\Exception $e) {
@@ -44,15 +46,21 @@ class BuyBookShopLib
 
         }
 
-
     }
 
     // Method to VIEW BOOK AFTER BUY.
-    public function viewBooksAfterBuy()  {
+    public function viewBooksAfterBuy():array  {
 
+        $viewbooks=Buybook::all()->toArray();
 
+        if(!empty($viewbooks))
+        {
 
-        return Buybook::all()->toArray();
+            return $viewbooks;
+        }
+        else {
+            return [];
+        }
 
     }
 }

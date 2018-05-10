@@ -5,26 +5,25 @@ namespace App\Lib\Crud;
 
 use Illuminate\Support\Facades\Log;
 use App\Models\Crud\Book;
-
-
+use Mockery\Exception;
 
 
 class BookShopLib
 {
 
     //Method Retrun User Books.
-    public function getBooks()
+    public function getBooks(): array
     {
-        try {
-            $getbooks = Book::all()->toArray();
+        $getbooks = Book::all()->toArray();
 
-                return $getbooks;
+        if (!empty($getbooks)) {
+            return $getbooks;
+        } else {
 
-        } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-
+            return [];
         }
+
+
     }
 
     // method to store NEW BOOK data
@@ -44,7 +43,7 @@ class BookShopLib
 
 
         } catch (\Exception $e) {
-           return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
 
         }
@@ -56,7 +55,7 @@ class BookShopLib
         try {
             $delBook = Book::destroy($id);
 
-                return $delBook;
+            return $delBook;
 
         } catch (\Exception $e) {
             return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
@@ -71,17 +70,43 @@ class BookShopLib
         try {
 
 
-            $bookUpdate= Book::find($data->update_book_id);
+            $id = array("id" => $data->id);
 
-            $bookUpdate->name = $data->update_book_name;
-            $bookUpdate->price = $data->update_book_price;
-            $bookUpdate->author_name = $data->update_book_author_name;
-            $bookUpdate->special_price = $data->update_book_special_price;
-            $bookUpdate->book_created_date = $data->update_book_created_date;
-            $bookUpdate->quantity = $data->update_book_quantity;
+            $bookUpdates = array("name" => $data->name, "price" => $data->price, "author_name" => $data->author_name,
+                "special_price" => $data->special_price, "book_created_date" => $data->book_created_date, "quantity" => $data->quantity);
 
-            return $bookUpdate->save();
+            $result = Book::updateOrCreate($id, $bookUpdates);
 
+            if (!$result) {
+                throw new Exception("Error in book updateOrCreate");
+            }
+
+//            $bookUpdate= Book::find($data->update_book_id);
+//
+//            $bookUpdate->name = $data->update_book_name;
+//            $bookUpdate->price = $data->update_book_price;
+//            $bookUpdate->author_name = $data->update_book_author_name;
+//            $bookUpdate->special_price = $data->update_book_special_price;
+//            $bookUpdate->book_created_date = $data->update_book_created_date;
+//            $bookUpdate->quantity = $data->update_book_quantity;
+//
+//            return $bookUpdate->save();
+
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+
+
+        }
+    }
+
+// method to get books to admin books view. (to datatable)
+    public function getAPIBooks()
+    {
+        try {
+            $getbooks = Book::select('id', 'name', 'price', 'special_price', 'author_name', 'book_created_date', 'quantity');
+
+            return $getbooks;
 
         } catch (\Exception $e) {
             return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
@@ -90,12 +115,17 @@ class BookShopLib
         }
     }
 
-    public function getAPIBooks()
+    // method SUBTRACT  the buying quantity from BOOKS table.
+    public function subtractBookQuantity($id)
     {
         try {
-            $getbooks =  Book::select('id','name', 'price', 'special_price','author_name','book_created_date','quantity');
 
-            return $getbooks;
+            $saveBook = Book::find($id);
+
+            return $saveBook;
+
+//            return Book::updateOrCreate(['quantity' => '$qty'],['id' => '$id']);
+
 
         } catch (\Exception $e) {
             return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
