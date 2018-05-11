@@ -77,7 +77,7 @@ class BookShopLib
 
             $result = Book::updateOrCreate($id, $bookUpdates);
             
-                return $result;
+               
             if (!$result) {
                 throw new Exception("Error in book updateOrCreate");
             }
