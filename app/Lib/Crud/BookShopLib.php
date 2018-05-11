@@ -76,21 +76,12 @@ class BookShopLib
                 "special_price" => $data->special_price, "book_created_date" => $data->book_created_date, "quantity" => $data->quantity);
 
             $result = Book::updateOrCreate($id, $bookUpdates);
-
+            
+                return $result;
             if (!$result) {
                 throw new Exception("Error in book updateOrCreate");
             }
 
-//            $bookUpdate= Book::find($data->update_book_id);
-//
-//            $bookUpdate->name = $data->update_book_name;
-//            $bookUpdate->price = $data->update_book_price;
-//            $bookUpdate->author_name = $data->update_book_author_name;
-//            $bookUpdate->special_price = $data->update_book_special_price;
-//            $bookUpdate->book_created_date = $data->update_book_created_date;
-//            $bookUpdate->quantity = $data->update_book_quantity;
-//
-//            return $bookUpdate->save();
 
 
         } catch (\Exception $e) {
@@ -123,8 +114,6 @@ class BookShopLib
             $saveBook = Book::find($id);
 
             return $saveBook;
-
-//            return Book::updateOrCreate(['quantity' => '$qty'],['id' => '$id']);
 
 
         } catch (\Exception $e) {
