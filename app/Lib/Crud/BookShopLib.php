@@ -38,12 +38,13 @@ class BookShopLib
             $saveBooks->special_price = $data->special_price;
             $saveBooks->book_created_date = $data->book_created_date;
             $saveBooks->quantity = $data->quantity;
+            $saveBooks->save();
 
-            return $saveBooks->save();
+            return back()->with('success', ['New Book Successfully Created.']);
 
 
         } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return back()->withErrors( 'OOPS.! Error In Creating New Book.');
 
 
         }
@@ -53,12 +54,19 @@ class BookShopLib
     public function bookdelete($id)
     {
         try {
-            $delBook = Book::destroy($id);
-
-            return $delBook;
+          Book::destroy($id);
+//           if (!empty($bookdel))
+//                {-
+//                    return back()->with('success', ['Book Successfully Deleted']);
+//
+//                }
+//                else{
+//                    return back()->withErrors( 'OOPS.! Error In Book Deletefirst.');
+//                }
+            return back()->with('success', ['Book Successfully Deleted.']);
 
         } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return back()->withErrors( 'OOPS.! Error In Book Delete.');
 
 
         }
@@ -75,26 +83,13 @@ class BookShopLib
             $bookUpdates = array("name" => $data->name, "price" => $data->price, "author_name" => $data->author_name,
                 "special_price" => $data->special_price, "book_created_date" => $data->book_created_date, "quantity" => $data->quantity);
 
-            $result = Book::updateOrCreate($id, $bookUpdates);
 
-            if (!$result) {
-                throw new Exception("Error in book updateOrCreate");
-            }
+            Book::updateOrCreate($id, $bookUpdates);
 
-//            $bookUpdate= Book::find($data->update_book_id);
-//
-//            $bookUpdate->name = $data->update_book_name;
-//            $bookUpdate->price = $data->update_book_price;
-//            $bookUpdate->author_name = $data->update_book_author_name;
-//            $bookUpdate->special_price = $data->update_book_special_price;
-//            $bookUpdate->book_created_date = $data->update_book_created_date;
-//            $bookUpdate->quantity = $data->update_book_quantity;
-//
-//            return $bookUpdate->save();
-
+            return back()->with('success', ['Book Successfully Updated.']);
 
         } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return back()->withErrors( 'OOPS.! Error In Book Update.');
 
 
         }
@@ -103,35 +98,17 @@ class BookShopLib
 // method to get books to admin books view. (to datatable)
     public function getAPIBooks()
     {
-        try {
-            $getbooks = Book::select('id', 'name', 'price', 'special_price', 'author_name', 'book_created_date', 'quantity');
 
-            return $getbooks;
+           return Book::select('id', 'name', 'price', 'special_price', 'author_name', 'book_created_date', 'quantity');
 
-        } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-
-        }
     }
 
     // method SUBTRACT  the buying quantity from BOOKS table.
     public function subtractBookQuantity($id)
     {
-        try {
 
-            $saveBook = Book::find($id);
+            return  Book::find($id);
 
-            return $saveBook;
-
-//            return Book::updateOrCreate(['quantity' => '$qty'],['id' => '$id']);
-
-
-        } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-
-        }
     }
 
 

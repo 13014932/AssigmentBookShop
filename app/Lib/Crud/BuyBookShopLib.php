@@ -37,11 +37,12 @@ class BuyBookShopLib
 
             $saveBook->quantity = $bookqty - ($buyedbook);
 
-            return $saveBook->save();
+             $saveBook->save();
 
+           return redirect('buydbooks')->with('success', ['Book purchesed Successfully.']);
 
         } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return redirect('userbooks')->withErrors( 'OOPS.! Error In purchesing Book.');
 
 
         }

@@ -23,7 +23,7 @@ class BooksAPIController extends Controller
 
         }
         catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
 
         }

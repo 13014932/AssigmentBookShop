@@ -493,31 +493,32 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>book_id</label>
-                        <input type="text" name="update_book_id" id="update_book_id" class="form-control" readonly>
+                        <input type="text" name="id" id="update_book_id" class="form-control" readonly>
                     </div>
                     <div class="form-group">
                         <label>book_name</label>
-                        <input type="text" name="update_book_name" id="update_book_name" class="form-control">
+                        <input type="text" name="name" id="update_book_name" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>price</label>
-                        <input type="number" name="update_book_price" id="update_book_price" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>author_name</label>
-                        <input type="text" name="update_book_author_name" id="update_book_author_name" class="form-control">
+                        <input type="number" name="price" id="update_book_price" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>special_price</label>
-                        <input type="number" name="update_book_special_price" id="update_book_special_price" class="form-control">
+                        <input type="number" name="special_price" id="update_book_special_price" class="form-control">
                     </div>
                     <div class="form-group">
+                        <label>author_name</label>
+                        <input type="text" name="author_name" id="update_book_author_name" class="form-control">
+                    </div>
+
+                    <div class="form-group">
                         <label>book_created_date</label>
-                        <input type="text" name="update_book_created_date" id="update_book_created_date" class="form-control">
+                        <input type="date" data-date-inline-picker="true" name="book_created_date" id="update_book_created_date" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>quantity</label>
-                        <input type="number" name="update_book_quantity" id="update_book_quantity" class="form-control">
+                        <input type="number" name="quantity" id="update_book_quantity" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">

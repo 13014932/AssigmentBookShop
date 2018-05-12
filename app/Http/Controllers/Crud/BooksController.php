@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
+
 
 class BooksController extends Controller
 {
@@ -29,7 +29,7 @@ class BooksController extends Controller
             return view('user.userbooks', ['showdata' => $Books]);
 
         } catch (\Exception $e) {
-           return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return redirect('errors')->withErrors( 'OOPS.! Error In Loading... Books.');
 
 
         }
@@ -46,7 +46,7 @@ class BooksController extends Controller
 
         ]);
         if ($validator->fails()) {
-            return redirect('errors')
+            return back()
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -56,10 +56,10 @@ class BooksController extends Controller
             $data = new BookShopLib();
             $data->storeNewBook($request);
 
-            return redirect('/adminbooks');
+            return back();
 
         } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return back()->withErrors( 'OOPS.! Error In Creating New Book.');
 
         }
 
@@ -72,10 +72,10 @@ class BooksController extends Controller
             $delBook = new BookShopLib();
             $delBook->bookdelete($request->book_del_id);
 
-                return redirect('/adminbooks');
+            return back();
 
         } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return back()->withErrors( 'OOPS. Error In Book Delete..!');
 
         }
     }
@@ -90,7 +90,7 @@ class BooksController extends Controller
 
         ]);
         if ($validator->fails()) {
-            return redirect('errors')
+            return back()
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -98,25 +98,22 @@ class BooksController extends Controller
             $bookUpdate = new BookShopLib();
             $bookUpdate->bookUpdate($request);
 
-                return redirect('/adminbooks');
+            return back();
 
         } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return back()->withErrors( 'OOPS.! Error In Book Update.');
 
 
         }
 
     }
 
+   // Method to display error on a page.
     public function errors()
     {
-        try {
-            return view('post.errors');
-
-        } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-
-        }
+        return view('post.errors');
     }
+
+
+
 }
