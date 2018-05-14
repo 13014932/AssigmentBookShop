@@ -56,7 +56,7 @@ class BooksController extends Controller
             $data = new BookShopLib();
             $data->storeNewBook($request);
 
-            return back();
+            return back()->with('success', ['New Book Successfully Created.']);
 
         } catch (\Exception $e) {
             return back()->withErrors( 'OOPS.! Error In Creating New Book.');
@@ -65,20 +65,7 @@ class BooksController extends Controller
 
     }
 
-    // method to DELETE BOOK.
-    public function bookdelete(Request $request)
-    {
-        try {
-            $delBook = new BookShopLib();
-            $delBook->bookdelete($request->book_del_id);
 
-            return back();
-
-        } catch (\Exception $e) {
-            return back()->withErrors( 'OOPS. Error In Book Delete..!');
-
-        }
-    }
 
     //method to UPDATE Book  Data.
 
@@ -98,7 +85,7 @@ class BooksController extends Controller
             $bookUpdate = new BookShopLib();
             $bookUpdate->bookUpdate($request);
 
-            return back();
+            return back()->with('success', ['Book Successfully Updated.']);
 
         } catch (\Exception $e) {
             return back()->withErrors( 'OOPS.! Error In Book Update.');
@@ -106,6 +93,21 @@ class BooksController extends Controller
 
         }
 
+    }
+
+    // method to DELETE BOOK.
+    public function bookdelete(Request $request)
+    {
+        try {
+            $delBook = new BookShopLib();
+            $delBook->bookdelete($request->book_del_id);
+
+            return back()->with('success', ['Book Successfully Deleted.']);
+
+        } catch (\Exception $e) {
+            return back()->withErrors( 'OOPS. Error In Book Delete..!');
+
+        }
     }
 
    // Method to display error on a page.

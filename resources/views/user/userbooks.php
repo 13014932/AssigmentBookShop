@@ -70,7 +70,7 @@ if ($errors->any()) {
 
 
         if(document.getElementById('model_book_quantity').value > temp) {
-            alert('Book Quantity Not Greater Then => ' + temp);
+            alert('Book Quantity Not Available Greater Then  ' + temp);
             document.getElementById('model_book_buy').disabled =true;
         }
         else {

@@ -11,6 +11,12 @@ use Mockery\Exception;
 class BookShopLib
 {
 
+    // for testing PuposeOnly test -tests-
+    public static function  sum($a,$b){
+
+        return $c=$a+$b;
+    }
+
     //Method Retrun User Books.
     public function getBooks(): array
     {
@@ -29,7 +35,7 @@ class BookShopLib
     // method to store NEW BOOK data
     public function storeNewBook($data)
     {
-        try {
+
             $saveBooks = new Book;
 
             $saveBooks->name = $data->book_name;
@@ -38,61 +44,34 @@ class BookShopLib
             $saveBooks->special_price = $data->special_price;
             $saveBooks->book_created_date = $data->book_created_date;
             $saveBooks->quantity = $data->quantity;
-            $saveBooks->save();
 
-            return back()->with('success', ['New Book Successfully Created.']);
+            return $saveBooks->save();
 
-
-        } catch (\Exception $e) {
-            return back()->withErrors( 'OOPS.! Error In Creating New Book.');
-
-
-        }
     }
 
-    // method to DELETE Book.
-    public function bookdelete($id)
-    {
-        try {
-          Book::destroy($id);
-//           if (!empty($bookdel))
-//                {-
-//                    return back()->with('success', ['Book Successfully Deleted']);
-//
-//                }
-//                else{
-//                    return back()->withErrors( 'OOPS.! Error In Book Deletefirst.');
-//                }
-            return back()->with('success', ['Book Successfully Deleted.']);
-
-        } catch (\Exception $e) {
-            return back()->withErrors( 'OOPS.! Error In Book Delete.');
-
-
-        }
-    }
 
     //method to UPDATE Book  Data.
     public function bookUpdate($data)
     {
-        try {
-
-
             $id = array("id" => $data->id);
+
 
             $bookUpdates = array("name" => $data->name, "price" => $data->price, "author_name" => $data->author_name,
                 "special_price" => $data->special_price, "book_created_date" => $data->book_created_date, "quantity" => $data->quantity);
 
 
-            Book::updateOrCreate($id, $bookUpdates);
+           $updates= Book::updateOrCreate($id, $bookUpdates);
 
-            return back()->with('success', ['Book Successfully Updated.']);
-
-        } catch (\Exception $e) {
-            return back()->withErrors( 'OOPS.! Error In Book Update.');
+           return $updates;
 
 
-        }
+    }
+
+    // method to DELETE Book.
+    public function bookdelete($id)
+    {
+
+        return Book::destroy($id);
     }
 
 // method to get books to admin books view. (to datatable)
@@ -104,10 +83,16 @@ class BookShopLib
     }
 
     // method SUBTRACT  the buying quantity from BOOKS table.
-    public function subtractBookQuantity($id)
+    public function subtractBookQuantity($id,$buyedBookQty)
     {
 
-            return  Book::find($id);
+        $book=  Book::find($id);
+        $bookqty = $book->quantity;
+//            dd($bookqty);
+
+        $book->quantity = $bookqty - ($buyedBookQty);
+
+       return $book->save();
 
     }
 

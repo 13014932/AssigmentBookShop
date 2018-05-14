@@ -539,7 +539,7 @@
                 <input type="hidden" name="_token" value="<?php echo csrf_token() ?>"/>
 
                 <div class="modal-header">
-                    <h4 class="modal-title">Delete Vendor ?</h4>
+                    <h4 class="modal-title">Delete Book ?</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
                     </button>
                 </div>

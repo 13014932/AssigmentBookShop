@@ -16,10 +16,10 @@ class BuyBooksController extends Controller
     {
         try {
             $data = new BuyBookShopLib();
-           return $data->storeBookAfterBuy($request);
+           $data->storeBookAfterBuy($request);
 
 
-//            return redirect('buydbooks')->with('success', ['New Book Successfully Createsdasdasdad.']);
+            return redirect('buydbooks')->with('success', ['Book *purchesed* Successfully.']);
 
         }
         catch (\Exception $e) {
@@ -34,7 +34,7 @@ class BuyBooksController extends Controller
     public function viewBooksAfterBuy()
     {
 
-              $data = new BuyBookShopLib();
+             $data = new BuyBookShopLib();
             $data = $data->viewBooksAfterBuy();
 
               return view('user.Buydbooks', ['buydbooks' => $data]);

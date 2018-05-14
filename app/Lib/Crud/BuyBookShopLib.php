@@ -16,7 +16,7 @@ class BuyBookShopLib
 // Method to store BOOK AFTER BUY.
     public function storeBookAfterBuy($data)
     {
-        try {
+
 
             $saveBook = new Buybook;
 
@@ -26,26 +26,12 @@ class BuyBookShopLib
 
             $saveBook->save();
 // SUBTRACT  the buying quantity from BOOKS table.
-
-            $buyedbook=$data->model_book_quantity;
+            $buyedBookQty=$data->model_book_quantity;
             $book_id=$data->book_id;
 
-            $book = new BookShopLib();
-            $saveBook = $book->subtractBookQuantity($book_id);
-            $bookqty = $saveBook->quantity;
-//            dd($buydbook);
+            $subBook = new BookShopLib();
+            $subBook->subtractBookQuantity($book_id,$buyedBookQty);
 
-            $saveBook->quantity = $bookqty - ($buyedbook);
-
-             $saveBook->save();
-
-           return redirect('buydbooks')->with('success', ['Book purchesed Successfully.']);
-
-        } catch (\Exception $e) {
-            return redirect('userbooks')->withErrors( 'OOPS.! Error In purchesing Book.');
-
-
-        }
 
     }
 
