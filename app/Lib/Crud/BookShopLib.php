@@ -61,9 +61,19 @@ class BookShopLib
                 "special_price" => $data['special_price'], "book_created_date" => $data['book_created_date'], "quantity" => $data['quantity']);
 
 
+
            $updates= Book::updateOrCreate($id, $bookUpdates);
 
            return $updates;
+
+            $result = Book::updateOrCreate($id, $bookUpdates);
+            
+               
+            if (!$result) {
+                throw new Exception("Error in book updateOrCreate");
+            }
+
+
 
 
     }
@@ -91,9 +101,12 @@ class BookShopLib
         $bookqty = $book->quantity;
 //            dd($bookqty);
 
+
         $book->quantity = $bookqty - ($buyedBookQty);
 
        return $book->save();
+
+
 
     }
 
