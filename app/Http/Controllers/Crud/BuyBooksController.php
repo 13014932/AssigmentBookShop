@@ -16,14 +16,14 @@ class BuyBooksController extends Controller
     {
         try {
             $data = new BuyBookShopLib();
-           $data->storeBookAfterBuy($request);
+           $data->storeBookAfterBuy($request->toArray());
 
 
-                return redirect('buydbooks');
+            return redirect('buydbooks')->with('success', ['Book *purchesed* Successfully.']);
 
         }
         catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return redirect('userbooks')->withErrors( 'OOPS.! Error In purchesing Book.');
 
 
         }
@@ -34,17 +34,10 @@ class BuyBooksController extends Controller
     public function viewBooksAfterBuy()
     {
 
-        try {
-            $data = new BuyBookShopLib();
+             $data = new BuyBookShopLib();
             $data = $data->viewBooksAfterBuy();
 
-                return view('user.Buydbooks', ['buydbooks' => $data]);
-
-        } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-
-        }
+              return view('user.Buydbooks', ['buydbooks' => $data]);
 
 
     }

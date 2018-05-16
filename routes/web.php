@@ -1,5 +1,6 @@
 <?php
-
+use App\Http\Controllers\Crud;
+use Illuminate\Auth\Middleware\Authenticate;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,26 +16,35 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 //Admin Book View Page.
-Route::get('adminbooks','BooksController@adminbooks');
+Route::get('adminbooks','Crud\BooksController@adminbooks');
 //NEW BOOk DATA  -- for STORE NEW Book INFO BY ADMIN.
-Route::post('/newbook','BooksController@storeNewBook');
+Route::post('/newbook','Crud\BooksController@storeNewBook');
 //Book DELETE.
-Route::post('/bookdelete','BooksController@bookdelete');
+Route::post('/bookdelete','Crud\BooksController@bookdelete');
 
 //Book  UPDATE data
-Route::post('/bookupdate','BooksController@bookUpdate');
+Route::post('/bookupdate','Crud\BooksController@bookUpdate');
 
 
 //USER Book View Page.
-Route::get('userbooks','BooksController@userbooks');
+Route::get('userbooks','Crud\BooksController@userbooks')->middleware('auth');
 
 
 //BUY Book.
-Route::post('buybook','BuyBookController@storeBookAfterBuy');
+Route::post('buybook','Crud\BuyBooksController@storeBookAfterBuy');
 
 //USER VIEW BookS AFTER BUY View Page.
-Route::get('buydbooks','BuyBookController@viewBooksAfterBuy');
+Route::get('buydbooks','Crud\BuyBooksController@viewBooksAfterBuy');
 
 //Admin Book View Page errors.
-Route::get('errors','BooksController@errors');
+Route::get('errors','Crud\BooksController@errors');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+
+Route::get('/admin', 'AdminController@admin')
+    ->middleware('is_admin')
+    ->name('adminbooks');

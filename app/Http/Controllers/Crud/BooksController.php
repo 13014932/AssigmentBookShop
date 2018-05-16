@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
+
 
 class BooksController extends Controller
 {
     // method to get adminbooks View.
     public function adminbooks()
     {
-            return view('admin.adminbooks');
+        return view('admin.adminbooks');
 
     }
 
@@ -29,7 +29,7 @@ class BooksController extends Controller
             return view('user.userbooks', ['showdata' => $Books]);
 
         } catch (\Exception $e) {
-           return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return redirect('errors')->withErrors('OOPS.! Error In Loading... Books.');
 
 
         }
@@ -41,12 +41,12 @@ class BooksController extends Controller
     public function storeNewBook(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'book_name' => 'required|max:8',
+            'name' => 'required|max:8',
             'book_created_date' => 'required|date'
 
         ]);
         if ($validator->fails()) {
-            return redirect('errors')
+            return back()
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -54,12 +54,41 @@ class BooksController extends Controller
         try {
 
             $data = new BookShopLib();
-            $data->storeNewBook($request);
+            $data->storeNewBook($request->toArray());
 
-            return redirect('/adminbooks');
+            return back()->with('success', ['New Book Successfully Created.']);
 
         } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return back()->withErrors('OOPS.! Error In Creating New Book.');
+
+        }
+
+    }
+
+
+    //method to UPDATE Book  Data.
+
+    public function bookUpdate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:8',
+            'book_created_date' => 'required|date'
+
+        ]);
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        try {
+            $bookUpdate = new BookShopLib();
+            $bookUpdate->bookUpdate($request->toArray());
+
+            return back()->with('success', ['Book Successfully Updated.']);
+
+        } catch (\Exception $e) {
+            return back()->withErrors('OOPS.! Error In Book Update.');
+
 
         }
 
@@ -72,51 +101,19 @@ class BooksController extends Controller
             $delBook = new BookShopLib();
             $delBook->bookdelete($request->book_del_id);
 
-                return redirect('/adminbooks');
+            return back()->with('success', ['Book Successfully Deleted.']);
 
         } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return back()->withErrors('OOPS. Error In Book Delete..!');
 
         }
     }
 
-    //method to UPDATE Book  Data.
-
-    public function bookUpdate(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:8',
-            'book_created_date' => 'required|date'
-
-        ]);
-        if ($validator->fails()) {
-            return redirect('errors')
-                ->withErrors($validator)
-                ->withInput();
-        }
-        try {
-            $bookUpdate = new BookShopLib();
-            $bookUpdate->bookUpdate($request);
-
-                return redirect('/adminbooks');
-
-        } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-
-        }
-
-    }
-
+    // Method to display error on a page.
     public function errors()
     {
-        try {
-            return view('post.errors');
-
-        } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-
-        }
+        return view('post.errors');
     }
+
+
 }

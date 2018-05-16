@@ -1,7 +1,39 @@
 
 <?php echo View::make('layouts.app'); ?>
 <?php echo View::make('layouts.BootStrapTable'); ?>
+<?php
 
+if (Session::has('success')) {
+
+    echo "<div class=\"alert alert-success\" > <ul >" ;
+
+    foreach (Session::get('success') as $suc) {
+
+
+        echo "<h2 ><li >".$suc."</li ></h2 ></ul>
+</div>";
+
+
+    }
+
+}
+
+if ($errors->any()) {
+
+    echo "<div class=\"alert alert-danger\" > <ul >" ;
+
+    foreach ($errors->all() as $error) {
+
+
+        echo "<h2 ><li >".$error."</li ></h2 >";
+
+
+    }
+
+}
+?>
+</ul>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     function stoppedBuyssds(){
@@ -62,7 +94,7 @@
 
 
         if(document.getElementById('model_book_quantity').value > temp) {
-            alert('Book Quantity Not Greater Then => ' + temp);
+            alert('Book Quantity Not Available Greater Then  ' + temp);
             document.getElementById('model_book_buy').disabled =true;
         }
         else {

@@ -6,6 +6,40 @@
 
 <?php echo View::make('datatable.DataTableLib'); ?>
 
+<h1></h1>
+<?php
+
+if (Session::has('success')) {
+
+    echo "<div class=\"alert alert-success alert-dismissible\" > <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><ul >" ;
+
+    foreach (Session::get('success') as $suc) {
+
+
+        echo "<h2 ><li >".$suc."</li ></h2 ></ul>
+</div>";
+
+
+    }
+
+}
+
+if ($errors->any()) {
+
+    echo "<div class=\"alert alert-danger alert-dismissible\" > <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><ul >" ;
+
+    foreach ($errors->all() as $error) {
+
+
+        echo "<h2 ><li >".$error."</li ></h2 ></ul></div>";
+
+
+    }
+
+}
+?>
+
+
 
 <div class="container">
     <div class="table-wrapper">

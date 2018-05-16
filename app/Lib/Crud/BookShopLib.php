@@ -11,6 +11,12 @@ use Mockery\Exception;
 class BookShopLib
 {
 
+    // for testing PuposeOnly test -tests-
+    public static function  sum($a,$b){
+
+        return $c=$a+$b;
+    }
+
     //Method Retrun User Books.
     public function getBooks(): array
     {
@@ -29,51 +35,36 @@ class BookShopLib
     // method to store NEW BOOK data
     public function storeNewBook($data)
     {
-        try {
+//          dd($data);
+
             $saveBooks = new Book;
 
-            $saveBooks->name = $data->book_name;
-            $saveBooks->price = $data->price;
-            $saveBooks->author_name = $data->author_name;
-            $saveBooks->special_price = $data->special_price;
-            $saveBooks->book_created_date = $data->book_created_date;
-            $saveBooks->quantity = $data->quantity;
+            $saveBooks->name = $data['name'];
+            $saveBooks->price = $data['price'];
+            $saveBooks->author_name = $data['author_name'];
+            $saveBooks->special_price = $data['special_price'];
+            $saveBooks->book_created_date = $data['book_created_date'];
+            $saveBooks->quantity = $data['quantity'];
 
             return $saveBooks->save();
 
-
-        } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-
-        }
     }
 
-    // method to DELETE Book.
-    public function bookdelete($id)
-    {
-        try {
-            $delBook = Book::destroy($id);
-
-            return $delBook;
-
-        } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-
-        }
-    }
 
     //method to UPDATE Book  Data.
     public function bookUpdate($data)
     {
-        try {
+            $id = array("id" => $data['id']);
 
 
-            $id = array("id" => $data->id);
+            $bookUpdates = array("name" => $data['name'], "price" => $data['price'], "author_name" => $data['author_name'],
+                "special_price" => $data['special_price'], "book_created_date" => $data['book_created_date'], "quantity" => $data['quantity']);
 
-            $bookUpdates = array("name" => $data->name, "price" => $data->price, "author_name" => $data->author_name,
-                "special_price" => $data->special_price, "book_created_date" => $data->book_created_date, "quantity" => $data->quantity);
+
+
+           $updates= Book::updateOrCreate($id, $bookUpdates);
+
+           return $updates;
 
             $result = Book::updateOrCreate($id, $bookUpdates);
             
@@ -84,43 +75,39 @@ class BookShopLib
 
 
 
-        } catch (\Exception $e) {
-            Log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
+    }
 
-        }
+    // method to DELETE Book.
+    public function bookdelete($id)
+    {
+
+        return Book::destroy($id);
     }
 
 // method to get books to admin books view. (to datatable)
     public function getAPIBooks()
     {
-        try {
-            $getbooks = Book::select('id', 'name', 'price', 'special_price', 'author_name', 'book_created_date', 'quantity');
 
-            return $getbooks;
+           return Book::select('id', 'name', 'price', 'special_price', 'author_name', 'book_created_date', 'quantity');
 
-        } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-
-        }
     }
 
     // method SUBTRACT  the buying quantity from BOOKS table.
-    public function subtractBookQuantity($id)
+    public function subtractBookQuantity($id,$buyedBookQty)
     {
-        try {
 
-            $saveBook = Book::find($id);
-
-            return $saveBook;
-
-
-        } catch (\Exception $e) {
-            return ($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+        $book=  Book::find($id);
+        $bookqty = $book->quantity;
+//            dd($bookqty);
 
 
-        }
+        $book->quantity = $bookqty - ($buyedBookQty);
+
+       return $book->save();
+
+
+
     }
 
 
