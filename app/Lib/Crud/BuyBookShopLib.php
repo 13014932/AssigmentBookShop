@@ -20,14 +20,14 @@ class BuyBookShopLib
 
             $saveBook = new Buybook;
 
-            $saveBook->book_id = $data->book_id;
-            $saveBook->book_price = $data->book_price;
-            $saveBook->quantity = $data->model_book_quantity;
+            $saveBook->book_id = $data['book_id'];
+            $saveBook->book_price = $data['book_price'];
+            $saveBook->quantity = $data['model_book_quantity'];
 
             $saveBook->save();
 // SUBTRACT  the buying quantity from BOOKS table.
-            $buyedBookQty=$data->model_book_quantity;
-            $book_id=$data->book_id;
+            $buyedBookQty=$data['model_book_quantity'];
+            $book_id=$data['book_id'];
 
             $subBook = new BookShopLib();
             $subBook->subtractBookQuantity($book_id,$buyedBookQty);

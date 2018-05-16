@@ -389,7 +389,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>book_name</label>
-                        <input type="text" name="book_name" value="mybook" class="form-control" required>
+                        <input type="text" name="name" value="mybook" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>price</label>

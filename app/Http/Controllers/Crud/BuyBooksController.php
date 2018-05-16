@@ -16,7 +16,7 @@ class BuyBooksController extends Controller
     {
         try {
             $data = new BuyBookShopLib();
-           $data->storeBookAfterBuy($request);
+           $data->storeBookAfterBuy($request->toArray());
 
 
             return redirect('buydbooks')->with('success', ['Book *purchesed* Successfully.']);

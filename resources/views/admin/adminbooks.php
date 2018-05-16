@@ -7,7 +7,7 @@
 
 if (Session::has('success')) {
 
-    echo "<div class=\"alert alert-success\" > <ul >" ;
+    echo "<div class=\"alert alert-success alert-dismissible\" > <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><ul >" ;
 
     foreach (Session::get('success') as $suc) {
 
@@ -22,20 +22,20 @@ if (Session::has('success')) {
 
 if ($errors->any()) {
 
-    echo "<div class=\"alert alert-danger\" > <ul >" ;
+    echo "<div class=\"alert alert-danger alert-dismissible\" > <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><ul >" ;
 
     foreach ($errors->all() as $error) {
 
 
-        echo "<h2 ><li >".$error."</li ></h2 >";
+        echo "<h2 ><li >".$error."</li ></h2 ></ul></div>";
 
 
     }
 
 }
 ?>
-</ul>
-</div>
+
+
 
 <div class="container">
     <div class="table-wrapper">

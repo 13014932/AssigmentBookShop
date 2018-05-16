@@ -14,7 +14,7 @@ class BooksController extends Controller
     // method to get adminbooks View.
     public function adminbooks()
     {
-            return view('admin.adminbooks');
+        return view('admin.adminbooks');
 
     }
 
@@ -29,7 +29,7 @@ class BooksController extends Controller
             return view('user.userbooks', ['showdata' => $Books]);
 
         } catch (\Exception $e) {
-            return redirect('errors')->withErrors( 'OOPS.! Error In Loading... Books.');
+            return redirect('errors')->withErrors('OOPS.! Error In Loading... Books.');
 
 
         }
@@ -41,7 +41,7 @@ class BooksController extends Controller
     public function storeNewBook(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'book_name' => 'required|max:8',
+            'name' => 'required|max:8',
             'book_created_date' => 'required|date'
 
         ]);
@@ -54,17 +54,16 @@ class BooksController extends Controller
         try {
 
             $data = new BookShopLib();
-            $data->storeNewBook($request);
+            $data->storeNewBook($request->toArray());
 
             return back()->with('success', ['New Book Successfully Created.']);
 
         } catch (\Exception $e) {
-            return back()->withErrors( 'OOPS.! Error In Creating New Book.');
+            return back()->withErrors('OOPS.! Error In Creating New Book.');
 
         }
 
     }
-
 
 
     //method to UPDATE Book  Data.
@@ -83,12 +82,12 @@ class BooksController extends Controller
         }
         try {
             $bookUpdate = new BookShopLib();
-            $bookUpdate->bookUpdate($request);
+            $bookUpdate->bookUpdate($request->toArray());
 
             return back()->with('success', ['Book Successfully Updated.']);
 
         } catch (\Exception $e) {
-            return back()->withErrors( 'OOPS.! Error In Book Update.');
+            return back()->withErrors('OOPS.! Error In Book Update.');
 
 
         }
@@ -105,17 +104,16 @@ class BooksController extends Controller
             return back()->with('success', ['Book Successfully Deleted.']);
 
         } catch (\Exception $e) {
-            return back()->withErrors( 'OOPS. Error In Book Delete..!');
+            return back()->withErrors('OOPS. Error In Book Delete..!');
 
         }
     }
 
-   // Method to display error on a page.
+    // Method to display error on a page.
     public function errors()
     {
         return view('post.errors');
     }
-
 
 
 }

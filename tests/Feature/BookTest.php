@@ -11,28 +11,60 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class BookTest extends TestCase
 {
 
-//temprory method check Sum of Two Digit.
+
+//temprory- method check Sum of Two Digit.
     public function testCheckSum()
     {
-        $data=BookShopLib::sum(3,2);
+        $data = BookShopLib::sum(3, 2);
 
         $this->assertEquals(5, $data);
     }
-//Method to test book update.
-    public function testBookUpdate()
+
+    //Method to test store new book.
+    public function testStoreBook()
     {
 
-        $update=new  BookShopLib();
+        $data = ["name" => "mybook",
+            "price" => "250",
+            "author_name" => "satpal",
+            "special_price" => "220",
+            "book_created_date" => "2018-06-07",
+            "quantity" => "5"];
 
-        
+
+        $store = new BookShopLib();
+
+        $store->storeNewBook($data);
+    }
+
+
+    //Method to test book update.
+    public function testBookUpdate()
+    {
+        $data = [
+            "id" => "10",
+            "name" => "mybook",
+            "price" => "250",
+            "author_name" => "satpal",
+            "special_price" => "220",
+            "book_created_date" => "2018-06-07",
+            "quantity" => "400"];
+
+        $update = new  BookShopLib();
+
+        $update->bookUpdate($data);
+
 
     }
-    //Method to test book delete.
-    public function testBookDelete(){
 
-        $delete=new  BookShopLib();
+//Method to test book delete.
 
-        $delete->bookdelete(40);
+    public function testBookDelete()
+    {
+
+        $delete = new  BookShopLib();
+
+        $delete->bookdelete(124);
 
 
     }

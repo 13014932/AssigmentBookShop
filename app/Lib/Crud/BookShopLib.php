@@ -35,15 +35,16 @@ class BookShopLib
     // method to store NEW BOOK data
     public function storeNewBook($data)
     {
+//          dd($data);
 
             $saveBooks = new Book;
 
-            $saveBooks->name = $data->book_name;
-            $saveBooks->price = $data->price;
-            $saveBooks->author_name = $data->author_name;
-            $saveBooks->special_price = $data->special_price;
-            $saveBooks->book_created_date = $data->book_created_date;
-            $saveBooks->quantity = $data->quantity;
+            $saveBooks->name = $data['name'];
+            $saveBooks->price = $data['price'];
+            $saveBooks->author_name = $data['author_name'];
+            $saveBooks->special_price = $data['special_price'];
+            $saveBooks->book_created_date = $data['book_created_date'];
+            $saveBooks->quantity = $data['quantity'];
 
             return $saveBooks->save();
 
@@ -53,11 +54,11 @@ class BookShopLib
     //method to UPDATE Book  Data.
     public function bookUpdate($data)
     {
-            $id = array("id" => $data->id);
+            $id = array("id" => $data['id']);
 
 
-            $bookUpdates = array("name" => $data->name, "price" => $data->price, "author_name" => $data->author_name,
-                "special_price" => $data->special_price, "book_created_date" => $data->book_created_date, "quantity" => $data->quantity);
+            $bookUpdates = array("name" => $data['name'], "price" => $data['price'], "author_name" => $data['author_name'],
+                "special_price" => $data['special_price'], "book_created_date" => $data['book_created_date'], "quantity" => $data['quantity']);
 
 
            $updates= Book::updateOrCreate($id, $bookUpdates);
