@@ -389,6 +389,25 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>book_name</label>
+
+                        <input type="text" name="book_name" value="mybook" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>price</label>
+                        <input type="number" name="price"  value="250" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>author_name</label>
+                        <input type="text" name="author_name" value="satpal " class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>special_price</label>
+                        <input type="number" name="special_price" value="220" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>book_created_date</label>
+                        <input type="date" data-date-inline-picker="true" value="2018-06-07" name="book_created_date" class="form-control"
+
                         <input type="text" name="book_name" class="form-control" required>
                     </div>
                     <div class="form-group">
@@ -406,11 +425,16 @@
                     <div class="form-group">
                         <label>book_created_date</label>
                         <input type="date" data-date-inline-picker="true" name="book_created_date" class="form-control"
+
                                required>
                     </div>
                     <div class="form-group">
                         <label>quantity</label>
+
+                        <input type="number" name="quantity" value="5" class="form-control" required>
+
                         <input type="number" name="quantity" class="form-control" required>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -423,7 +447,11 @@
 </div>
 
 <!--VIEW BOOK MODAL HTML (BootStrap Model for View Books Details)-->
+
+<div id="viewBookModal" class="modal fade" tabindex="-1">
+
 <div id="viewBookModal" class="modal fade">
+
     <div class="modal-dialog">
         <div class="modal-content">
             <form method="post" action="viewbook">
@@ -602,6 +630,7 @@
         </div>
     </div>
 </div>
+
 
 
 </body>
