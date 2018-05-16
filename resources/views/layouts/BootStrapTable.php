@@ -389,6 +389,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>book_name</label>
+
                         <input type="text" name="book_name" value="mybook" class="form-control" required>
                     </div>
                     <div class="form-group">
@@ -406,11 +407,34 @@
                     <div class="form-group">
                         <label>book_created_date</label>
                         <input type="date" data-date-inline-picker="true" value="2018-06-07" name="book_created_date" class="form-control"
+
+                        <input type="text" name="book_name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>price</label>
+                        <input type="number" name="price" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>author_name</label>
+                        <input type="text" name="author_name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>special_price</label>
+                        <input type="number" name="special_price" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>book_created_date</label>
+                        <input type="date" data-date-inline-picker="true" name="book_created_date" class="form-control"
+
                                required>
                     </div>
                     <div class="form-group">
                         <label>quantity</label>
+
                         <input type="number" name="quantity" value="5" class="form-control" required>
+
+                        <input type="number" name="quantity" class="form-control" required>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -423,7 +447,11 @@
 </div>
 
 <!--VIEW BOOK MODAL HTML (BootStrap Model for View Books Details)-->
+
 <div id="viewBookModal" class="modal fade" tabindex="-1">
+
+<div id="viewBookModal" class="modal fade">
+
     <div class="modal-dialog">
         <div class="modal-content">
             <form method="post" action="viewbook">
@@ -553,6 +581,50 @@
 
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                     <input type="submit" class="btn btn-danger" value="Delete">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Buy Book Modal HTML (BootStrap Model for Buy Book) -->
+
+
+<div id="BookBuyModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="/buybook">
+                <input type="hidden" name="_token" value="<?php echo csrf_token() ?>"/>
+                <div class="modal-header">
+                    <h4 class="modal-title">BUY BOOK !</h4><br>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Book Details</label><br><br>
+                        <label class="custom-control custom-checkbox">
+                            <span >BOOK-ID</span>  <input type="number" name="book_id" id="book_id"  readonly>
+                        </label><br><br>
+                        <label class="custom-control custom-checkbox">
+                            <span >BOOK PRICE</span>  <input type="text" name="book_price" id="book_price" readonly>
+
+                            <input type="hidden" name="book_temp_qty" id="book_temp_qty" readonly>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Book Quantity</label>
+
+
+                        <input type="number" id="model_book_quantity" name="model_book_quantity"  oninput="disableBuyButton()"  onchange="disableBuyButtonHighQty()" class="form-control"  required>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal"  value="Cancel">
+
+
+                    <input type="submit" class="btn btn-info" name='model_book_buy' id='model_book_buy' onmouseover ="disableBuyButton()"  value="Buy NOW !">
                 </div>
             </form>
         </div>

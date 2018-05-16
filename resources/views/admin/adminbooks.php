@@ -1,5 +1,9 @@
 
+
 <?php echo View::make('layouts.BootStrapTable'); ?>
+
+<?php echo View::make('layouts.BooksLayout'); ?>
+
 <?php echo View::make('datatable.DataTableLib'); ?>
 
 
