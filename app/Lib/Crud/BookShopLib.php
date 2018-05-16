@@ -66,16 +66,7 @@ class BookShopLib
 
            return $updates;
 
-            $result = Book::updateOrCreate($id, $bookUpdates);
             
-               
-            if (!$result) {
-                throw new Exception("Error in book updateOrCreate");
-            }
-
-
-
-
     }
 
     // method to DELETE Book.
