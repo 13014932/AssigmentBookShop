@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Crud;
 
-use App\Lib\Crud\BuyBookShopLib;
+use App\Lib\Crud\BuyBook;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Log;
@@ -15,14 +15,16 @@ class BuyBooksController extends Controller
     public function storeBookAfterBuy(Request $request)
     {
         try {
-            $data = new BuyBookShopLib();
-           $data->storeBookAfterBuy($request->toArray());
+            $request_array=$request->all();
+            $data = new BuyBook();
+           $data->storeBookAfterBuy($request_array);
 
 
             return redirect('buydbooks')->with('success', ['Book *purchesed* Successfully.']);
 
         }
         catch (\Exception $e) {
+            log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
             return redirect('userbooks')->withErrors( 'OOPS.! Error In purchesing Book.');
 
 
@@ -34,7 +36,7 @@ class BuyBooksController extends Controller
     public function viewBooksAfterBuy()
     {
 
-             $data = new BuyBookShopLib();
+             $data = new BuyBook();
             $data = $data->viewBooksAfterBuy();
 
               return view('user.Buydbooks', ['buydbooks' => $data]);

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Crud;
 
-use App\Lib\Crud\BookShopLib;
+use App\Lib\Crud\Book;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
@@ -15,7 +15,7 @@ class BooksAPIController extends Controller
     {
         try
         {
-            $data = new BookShopLib();
+            $data = new Book();
             $query = $data->getAPIBooks();
 
                 return datatables($query)->make(true);

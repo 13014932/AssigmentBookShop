@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Crud;
 
-use App\Lib\Crud\BookShopLib;
+use App\Lib\Crud\Book;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
@@ -12,21 +12,21 @@ use Illuminate\Support\Facades\Validator;
 class BooksController extends Controller
 {
     // method to get adminbooks View.
-    public function adminbooks()
+    public function adminBooks()
     {
         return view('admin.adminbooks');
 
     }
 
     // method to get all books to user View page.
-    public function userbooks()
+    public function userBooks()
     {
 
         try {
-            $data = new BookShopLib();
-            $Books = $data->getBooks();
+            $data = new Book();
+            $books = $data->getBooks();
 
-            return view('user.userbooks', ['showdata' => $Books]);
+            return view('user.userbooks', ['showdata' => $books]);
 
         } catch (\Exception $e) {
             return redirect('errors')->withErrors('OOPS.! Error In Loading... Books.');
@@ -52,11 +52,17 @@ class BooksController extends Controller
         }
 
         try {
+            $request_array=$request->all();
+            $data = new Book();
 
-            $data = new BookShopLib();
-            $data->storeNewBook($request->toArray());
+           $book=$data->storeNewBook($request_array);
 
-            return back()->with('success', ['New Book Successfully Created.']);
+            if (!empty($book))
+            {
+
+                return back()->with('success', ['New Book Successfully Created.']);
+            }
+            throw new \Exception ();
 
         } catch (\Exception $e) {
             return back()->withErrors('OOPS.! Error In Creating New Book.');
@@ -81,10 +87,15 @@ class BooksController extends Controller
                 ->withInput();
         }
         try {
-            $bookUpdate = new BookShopLib();
-            $bookUpdate->bookUpdate($request->toArray());
+            $book_update = new Book();
+            $book_update=$book_update->bookUpdate($request);
 
-            return back()->with('success', ['Book Successfully Updated.']);
+            if (!empty($book_update)){
+
+                return back()->with('success', ['Book Successfully Updated.']);
+            }
+            throw new \Exception ();
+
 
         } catch (\Exception $e) {
             return back()->withErrors('OOPS.! Error In Book Update.');
@@ -95,15 +106,21 @@ class BooksController extends Controller
     }
 
     // method to DELETE BOOK.
-    public function bookdelete(Request $request)
+    public function bookDelete(Request $request)
     {
         try {
-            $delBook = new BookShopLib();
-            $delBook->bookdelete($request->book_del_id);
+            $del_book = new Book();
+            $del_book= $del_book->bookDelete($request->book_del_id);
 
-            return back()->with('success', ['Book Successfully Deleted.']);
+            if (!empty($del_book)) {
+                return back()->with('success', ['Book Successfully Deleted.']);
 
-        } catch (\Exception $e) {
+            }
+
+            throw new \Exception ();
+
+        }
+        catch (\Exception $e) {
             return back()->withErrors('OOPS. Error In Book Delete..!');
 
         }
