@@ -21,7 +21,7 @@ class BookTest extends TestCase
 
       $book_name='varun';
 
-      $book=BookLib::createBook(['name' => $book_name, 'price' => 1.2, 'special_price' => 1.2, 'author_name' => 'varun', 'book_created_date' => now(), 'quantity' => 1]);
+      $book=BookLib::createBook(['name' => $book_name, 'price' => 1,  'author_name' => 'varun',  'quantity' => 1]);
 
       $this->assertEquals($book->name, $book_name);
       $this->assertGreaterThan(0, $book->id);
@@ -36,9 +36,9 @@ class BookTest extends TestCase
 
   }
 
-  public function testBookDelete()
-  {
-
-      BookLib::deleteBook( 35);
-  }
+//  public function testBookDelete()
+//  {
+//
+//      BookLib::deleteBook( 35);
+//  }
 }

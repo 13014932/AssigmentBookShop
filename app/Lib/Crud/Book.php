@@ -17,7 +17,9 @@ class Book
     {
         $validator = Validator::make($array, [
             'name' => 'required|max:8',
-            'book_created_date' => 'required|date'
+            'price' => 'required|min:0',
+            'quantity' => 'required|max:8',
+//            'book_created_date' => 'required|date'
 
         ]);
         if ($validator->fails()) {
@@ -34,7 +36,16 @@ class Book
 
     public static function updateBook($array): BookModel
     {
+        $validator = Validator::make($array, [
+            'name' => 'required|max:8',
+            'book_created_date' => 'required|date'
 
+        ]);
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $book = BookModel::find($array['id']);
 
