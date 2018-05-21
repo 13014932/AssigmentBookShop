@@ -35,4 +35,14 @@ class Book
         return $book;
     }
 
+    public static function deleteBook($id): BookModel
+    {
+
+        $book=BookModel::find($id);
+
+        $book->destroy($id);
+
+        return $book;
+    }
+
 }

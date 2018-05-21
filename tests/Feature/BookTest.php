@@ -31,8 +31,14 @@ class BookTest extends TestCase
   public function testUpdateBook(){
 
 
-       BookLib::updateBook(['id' => 15, 'name' => 'mybook', 'price' => 1.2, 'special_price' => 1.2, 'author_name' => 'varun', 'book_created_date' => now(), 'quantity' => 1]);
+       BookLib::updateBook(['id' => 33, 'name' => 'mybook', 'price' => 1.2, 'special_price' => 1.2, 'author_name' => 'varun', 'book_created_date' => now(), 'quantity' => 1]);
 
 
+  }
+
+  public function testBookDelete()
+  {
+
+      BookLib::deleteBook( 28);
   }
 }
