@@ -15,20 +15,28 @@ class Book
 
     public static function createBook($array): BookModel
     {
+
+        $validator=Validator::make($array, [
+            'name' => 'required|max:8',
+            'price' => 'required|min:0',
+            'quantity' => 'required|min:0',
+
+        ]);
+        if ($validator->fails()) {
+            log::error('validate error');
+
+        }
+
         try {
 
-            Validator::make($array, [
-                'name' => 'required|max:8',
-                'price' => 'required|min:0',
-                'quantity' => 'required|min:8',
-
-            ]);
 
             $book = new BookModel;
             $book->fill($array);
             $book->save();
 
             return $book;
+
+
         }
         catch (\Exception $e) {
             log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
@@ -39,14 +47,18 @@ class Book
 
     public static function updateBook($array): BookModel
     {
+        $validator=Validator::make($array, [
+            'name' => 'required|max:8',
+            'price' => 'required|min:0',
+            'quantity' => 'required|min:0',
+
+        ]);
+        if ($validator->fails()) {
+            log::error('validate error');
+
+        }
+
         try {
-
-            Validator::make($array, [
-                'name' => 'required|max:8',
-                'price' => 'required|min:0',
-                'quantity' => 'required|min:8',
-
-            ]);
 
 
             $book = BookModel::find($array['id']);
