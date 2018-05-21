@@ -9,6 +9,11 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
+
+        <testsuite name="Application Test Suite">
+            <directory>./tests/</directory>
+        </testsuite>
+
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
@@ -29,5 +34,7 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="MAIL_DRIVER" value="array"/>
+        <env name="DB_CONNECTION" value="mysql"/>
+        <env name="DB_DATABASE" value="book_shop"/>
     </php>
 </phpunit>

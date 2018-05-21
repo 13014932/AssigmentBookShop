@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Lib\Crud\BookShopLib;
+use App\Lib\Crud\Book;
 
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,7 +15,7 @@ class BookTest extends TestCase
 //temprory- method check Sum of Two Digit.
     public function testCheckSum()
     {
-        $data = BookShopLib::sum(3, 2);
+        $data = Book::sum(3, 2);
 
         $this->assertEquals(5, $data);
     }
@@ -32,7 +32,7 @@ class BookTest extends TestCase
             "quantity" => "5"];
 
 
-        $store = new BookShopLib();
+        $store = new Book();
 
         $store->storeNewBook($data);
     }
@@ -50,7 +50,7 @@ class BookTest extends TestCase
             "book_created_date" => "2018-06-07",
             "quantity" => "400"];
 
-        $update = new  BookShopLib();
+        $update = new  Book();
 
         $update->bookUpdate($data);
 
@@ -62,7 +62,7 @@ class BookTest extends TestCase
     public function testBookDelete()
     {
 
-        $delete = new  BookShopLib();
+        $delete = new  Book();
 
         $delete->bookdelete(124);
 

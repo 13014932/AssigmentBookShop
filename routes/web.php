@@ -18,18 +18,18 @@ Route::get('/', function () {
 
 
 //Admin Book View Page.
-Route::get('adminbooks','Crud\BooksController@adminbooks');
+Route::get('adminbooks','Crud\BooksController@adminBooks');
 //NEW BOOk DATA  -- for STORE NEW Book INFO BY ADMIN.
 Route::post('/newbook','Crud\BooksController@storeNewBook');
 //Book DELETE.
-Route::post('/bookdelete','Crud\BooksController@bookdelete');
+Route::post('/bookdelete','Crud\BooksController@bookDelete');
 
 //Book  UPDATE data
 Route::post('/bookupdate','Crud\BooksController@bookUpdate');
 
 
 //USER Book View Page.
-Route::get('userbooks','Crud\BooksController@userbooks')->middleware('auth');
+Route::get('userbooks','Crud\BooksController@userBooks')->middleware('auth');
 
 
 //BUY Book.

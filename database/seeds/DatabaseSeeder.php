@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Book;
+use App\Models\Crud\Book;
+use App\Models\Crud\BuyBook;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -13,6 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        factory(App\Models\Book::class, 50)->create();
+        //seed 2 records in books table.
+        factory(Book::class, 10)->create();
+        //seed 5 records in buybooks table.
+        factory(BuyBook::class, 10)->create();
     }
 }

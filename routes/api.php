@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 // gives data to adminbooks page.
 Route::get('/BookApi', 'Crud\BooksAPIController@getBooks')->name('books');
+

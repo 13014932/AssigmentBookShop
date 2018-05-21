@@ -33,22 +33,47 @@ class Book
     }
 
     // method to store NEW BOOK data
-    public function storeNewBook($data): bool
+    public function storeNewBook($book_data):bool
     {
-//          dd($data);
+//          dd($data->id);
+        try{
+            if (!empty($book_data->id)){
+                $id=$book_data->id;
+            }
+            else{
+                $id=0;
+            }
+
+            $book = Model::findOrNew($id);
+            $book->fill($book_data->all());
+
+            return  $book->save();
+
+        }
+        catch (\Exception $e) {
+            log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+            return false;
+
+    }
 
 
-            $save_books = new Model();
+//            $save_books = new Model();
+//
+//            $save_books->name = $data['name'];
+//            $save_books->price = $data['price'];
+//            $save_books->author_name = $data['author_name'];
+//            $save_books->special_price = $data['special_price'];
+//            $save_books->book_created_date = $data['book_created_date'];
+//            $save_books->quantity = $data['quantity'];
+//
+//              $save_books->save();
 
-            $save_books->name = $data['name'];
-            $save_books->price = $data['price'];
-            $save_books->author_name = $data['author_name'];
-            $save_books->special_price = $data['special_price'];
-            $save_books->book_created_date = $data['book_created_date'];
-            $save_books->quantity = $data['quantity'];
-
-            return  $save_books->save();
-
+//        $id = array("id" => $data['id']);
+//        $bookUpdates = array("name" => $data['name'], "price" => $data['price'], "author_name" => $data['author_name'],
+//            "special_price" => $data['special_price'], "book_created_date" => $data['book_created_date'], "quantity" => $data['quantity']);
+//
+//        $updates= Model::updateOrCreate($id,$bookUpdates);
+//        return $updates;
 
     }
 
@@ -61,7 +86,7 @@ class Book
 
         $updates= $id->fill($data->input())->save();
 
-//        log::info($updates);
+       // log::info($updates);
            return $updates;
 
 

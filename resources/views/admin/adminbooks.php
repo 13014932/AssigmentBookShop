@@ -1,4 +1,3 @@
-
 <?php echo View::make('layouts.BootStrapTable'); ?>
 <?php echo View::make('datatable.DataTableLib'); ?>
 
@@ -7,12 +6,12 @@
 
 if (Session::has('success')) {
 
-    echo "<div class=\"alert alert-success alert-dismissible\" > <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><ul >" ;
+    echo "<div class=\"alert alert-success alert-dismissible\" > <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><ul >";
 
     foreach (Session::get('success') as $suc) {
 
 
-        echo "<h2 ><li >".$suc."</li ></h2 ></ul>
+        echo "<h2 ><li >" . $suc . "</li ></h2 ></ul>
 </div>";
 
 
@@ -22,19 +21,18 @@ if (Session::has('success')) {
 
 if ($errors->any()) {
 
-    echo "<div class=\"alert alert-danger alert-dismissible\" > <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><ul >" ;
+    echo "<div class=\"alert alert-danger alert-dismissible\" > <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a><ul >";
 
     foreach ($errors->all() as $error) {
 
 
-        echo "<h2 ><li >".$error."</li ></h2 ></ul></div>";
+        echo "<h2 ><li >" . $error . "</li ></h2 ></ul></div>";
 
 
     }
 
 }
 ?>
-
 
 
 <div class="container">
@@ -55,6 +53,7 @@ if ($errors->any()) {
                 </div>
             </div>
         </div>
+
         <table class="table table-striped table-hover display " cellspacing="0" id="datatable">
             <thead>
             <tr>
@@ -85,7 +84,8 @@ if ($errors->any()) {
         <script>
 
 
- // <!-- DATATABLE  PROCESSING (SERVER-SIDE)-->
+            //
+            <!-- DATATABLE  PROCESSING (SERVER-SIDE)-->
             $(document).ready(function () {
 
 
@@ -192,7 +192,9 @@ if ($errors->any()) {
                         "infoEmpty": "No records available",
                         "infoFiltered": "(filtered from _MAX_ total records)",
                         "search": "Search Books:",
+                        "processing": "Hang on. Waiting for response..."
                     },
+
                     "processing": true,
                     "serverSide": true,
                     "pagingType": "full_numbers",
@@ -200,6 +202,15 @@ if ($errors->any()) {
                     "scrollCollapse": true,
                     "lengthMenu": [10, 25, 50, 100, 500],
                     "ajax": "<?= route('books') ?>",
+//                    "deferLoading": 75,
+//                    "deferLoading": [ 10, 100 ],
+//                    "search": {
+//                        "search": "my_filter"
+//                    },
+//                    scroller: {
+//                        displayBuffer: 20
+//                    },
+
                     "columns": [
 
                         {"data": "id"},

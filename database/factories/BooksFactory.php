@@ -1,10 +1,15 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Models\Book;
+use App\Models\Crud\Book;
+/*
+ *
+ * create fake record for books table.
+ *
+ *
+ */
 
-
-$factory->define(App\Models\Book::class, function (Faker $faker)
+$factory->define(Book::class, function (Faker $faker)
 
 {
 

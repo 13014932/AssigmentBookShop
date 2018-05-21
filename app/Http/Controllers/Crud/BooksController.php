@@ -52,10 +52,10 @@ class BooksController extends Controller
         }
 
         try {
-            $request_array=$request->all();
+//            $request_array=$request->all();
             $data = new Book();
 
-           $book=$data->storeNewBook($request_array);
+           $book=$data->storeNewBook($request);
 
             if (!empty($book))
             {
@@ -88,7 +88,7 @@ class BooksController extends Controller
         }
         try {
             $book_update = new Book();
-            $book_update=$book_update->bookUpdate($request);
+            $book_update=$book_update->storeNewBook($request);
 
             if (!empty($book_update)){
 

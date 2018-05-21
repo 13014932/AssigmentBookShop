@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Lib\Crud\BuyBookShopLib;
+use App\Lib\Crud\BuyBook;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -19,7 +19,7 @@ class BuyBookTest extends TestCase
                 "model_book_quantity" => "10"
             ];
 
-            $buyedbook=new BuyBookShopLib();
+            $buyedbook=new BuyBook();
         $buyedbook->storeBookAfterBuy($data);
     }
 
