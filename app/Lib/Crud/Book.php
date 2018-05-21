@@ -57,24 +57,6 @@ class Book
     }
 
 
-//            $save_books = new Model();
-//
-//            $save_books->name = $data['name'];
-//            $save_books->price = $data['price'];
-//            $save_books->author_name = $data['author_name'];
-//            $save_books->special_price = $data['special_price'];
-//            $save_books->book_created_date = $data['book_created_date'];
-//            $save_books->quantity = $data['quantity'];
-//
-//              $save_books->save();
-
-//        $id = array("id" => $data['id']);
-//        $bookUpdates = array("name" => $data['name'], "price" => $data['price'], "author_name" => $data['author_name'],
-//            "special_price" => $data['special_price'], "book_created_date" => $data['book_created_date'], "quantity" => $data['quantity']);
-//
-//        $updates= Model::updateOrCreate($id,$bookUpdates);
-//        return $updates;
-
     }
 
 

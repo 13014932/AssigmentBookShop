@@ -26,7 +26,7 @@
     <!-- Script/LIb for datatable -->
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <!--    <script src="https://cdn.datatables.net/plug-ins/1.10.16/api/sum().js"></script>-->
-    
+
     <!-- CHECKBOX LIB -->
     <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/css/dataTables.checkboxes.css"
           rel="stylesheet"/>
@@ -58,6 +58,66 @@
         border-radius: 25px;
 
     }
+</style>
+<!-- admminbooks page styles-->
+<style>
+
+    table.dataTable td {
+
+        text-align: center;
+    }
+
+    /*massge on column hover*/
+    .message {
+        display: none;
+        color: #000;
+        background: #999;
+        position: absolute;
+        top: 10px;
+    }
+
+    th {
+        position: relative;
+    }
+
+    .anchor:hover + .message {
+        display: block !important;
+        z-index: 10;
+    }
+
+</style>
+<!-- userbooks page styles-->
+<style>
+
+
+    table.dataTable td {
+
+        text-align: center;
+    }
+    /*massge on column hover*/
+    .message{
+        display:none;
+        color:#000;
+        background:#999;
+        position:absolute;
+        top:10px;
+    }
+
+    th{
+        position:relative;
+    }
+
+    .anchor:hover + .message{
+        display:block !important;
+        z-index:10;
+    }
+    .qtydisable{
+        width: 40px;
+        background-color: beige;
+        text-align: center;
+
+    }
+
 </style>
 <body>
 

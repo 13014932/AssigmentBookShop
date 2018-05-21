@@ -1,4 +1,12 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 763d35213115a36df301c4305c5b63c37a23046d
 <?php echo View::make('layouts.BootStrapTable'); ?>
+
+<?php echo View::make('layouts.BooksLayout'); ?>
+
 <?php echo View::make('datatable.DataTableLib'); ?>
 
 <h1></h1>
