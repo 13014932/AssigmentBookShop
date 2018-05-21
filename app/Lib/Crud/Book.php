@@ -9,13 +9,22 @@
 namespace App\Lib\Crud;
 
 use App\Models\Crud\Book as BookModel;
-
+use Illuminate\Support\Facades\Validator;
 class Book
 {
 
     public static function createBook($array): BookModel
     {
+        $validator = Validator::make($array, [
+            'name' => 'required|max:8',
+            'book_created_date' => 'required|date'
 
+        ]);
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $book = new BookModel;
         $book->fill($array);
         $book->save();
@@ -25,6 +34,7 @@ class Book
 
     public static function updateBook($array): BookModel
     {
+
 
         $book = BookModel::find($array['id']);
 

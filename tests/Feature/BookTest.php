@@ -39,6 +39,6 @@ class BookTest extends TestCase
   public function testBookDelete()
   {
 
-      BookLib::deleteBook( 28);
+      BookLib::deleteBook( 35);
   }
 }
