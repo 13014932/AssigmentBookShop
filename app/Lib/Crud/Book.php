@@ -7,7 +7,7 @@
  */
 
 namespace App\Lib\Crud;
-
+use Illuminate\Support\Facades\Log;
 use App\Models\Crud\Book as BookModel;
 use Illuminate\Support\Facades\Validator;
 class Book
@@ -15,38 +15,53 @@ class Book
 
     public static function createBook($array): BookModel
     {
-        $validator = Validator::make($array, [
-            'name' => 'required|max:8',
-            'price' => 'required|min:0',
-            'quantity' => 'required|min:8',
+        try {
+
+            Validator::make($array, [
+                'name' => 'required|max:8',
+                'price' => 'required|min:0',
+                'quantity' => 'required|min:8',
+
+            ]);
+
+            $book = new BookModel;
+            $book->fill($array);
+            $book->save();
+
+            return $book;
+        }
+        catch (\Exception $e) {
+            log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
 
-        ]);
-
-        $book = new BookModel;
-        $book->fill($array);
-        $book->save();
-
-        return $book;
+        }
     }
 
     public static function updateBook($array): BookModel
     {
-        Validator::make($array, [
-            'name' => 'required|max:8',
-            'price' => 'required|min:0',
-            'quantity' => 'required|min:8',
+        try {
 
-        ]);
+            Validator::make($array, [
+                'name' => 'required|max:8',
+                'price' => 'required|min:0',
+                'quantity' => 'required|min:8',
+
+            ]);
 
 
-        $book = BookModel::find($array['id']);
+            $book = BookModel::find($array['id']);
 
-        $book = $book->fill($array);
+            $book = $book->fill($array);
 
-        $book->save();
+            $book->save();
 
-        return $book;
+            return $book;
+        }
+        catch (\Exception $e) {
+            log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
+
+
+        }
     }
 
     public static function deleteBook($id): BookModel

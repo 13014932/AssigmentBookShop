@@ -36,7 +36,8 @@ class BookTest extends TestCase
 
   }
 
-//  public function testBookDelete()
+//method to delete book
+//  public function testDeleteBook()
 //  {
 //
 //      BookLib::deleteBook( 35);
