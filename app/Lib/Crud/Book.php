@@ -18,13 +18,14 @@ class Book
 
         $validator=Validator::make($array, [
             'name' => 'required|max:8',
-            'price' => 'required|min:0',
-            'quantity' => 'required|min:0',
+            'price' => 'required|integer|min:0',
+            'quantity' => 'required|integer|min:0',
 
         ]);
         if ($validator->fails()) {
             log::error('validate error');
-
+            $book = new BookModel;
+            return $book;
         }
 
         try {
@@ -49,12 +50,14 @@ class Book
     {
         $validator=Validator::make($array, [
             'name' => 'required|max:8',
-            'price' => 'required|min:0',
-            'quantity' => 'required|min:0',
+            'price' => 'required|integer|min:0',
+            'quantity' => 'required|integer|min:0',
 
         ]);
         if ($validator->fails()) {
             log::error('validate error');
+            $book = new BookModel;
+            return $book;
 
         }
 
