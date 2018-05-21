@@ -61,18 +61,18 @@ class Book
 
 
     //method to UPDATE Book  Data.
-    public function bookUpdate($data):bool
-    {
-
-        $id = Model::find($data->id);
-
-        $updates= $id->fill($data->input())->save();
-
-       // log::info($updates);
-           return $updates;
-
-
-    }
+//    public function bookUpdate($data):bool
+//    {
+//
+//        $id = Model::find($data->id);
+//
+//        $updates= $id->fill($data->input())->save();
+//
+//       // log::info($updates);
+//           return $updates;
+//
+//
+//    }
 
     // method to DELETE Book.
     public function bookDelete($id):bool
