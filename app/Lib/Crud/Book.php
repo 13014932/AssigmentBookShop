@@ -13,42 +13,20 @@ use Illuminate\Support\Facades\Validator;
 class Book
 {
 
-    public static function createBook($array): BookModel
+    public static function createBook($book_data): BookModel
     {
 
-        $validator=Validator::make($array, [
-            'name' => 'required|max:8',
-            'price' => 'required|integer|min:0',
-            'quantity' => 'required|integer|min:0',
-
-        ]);
-        if ($validator->fails()) {
-            log::error('validate error');
             $book = new BookModel;
-            return $book;
-        }
-
-        try {
-
-
-            $book = new BookModel;
-            $book->fill($array);
+            $book->fill($book_data);
             $book->save();
 
             return $book;
 
-
-        }
-        catch (\Exception $e) {
-            log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
-
-
-        }
     }
 
-    public static function updateBook($array): BookModel
+    public static function updateBook($book_data): BookModel
     {
-        $validator=Validator::make($array, [
+        $validator=Validator::make($book_data, [
             'name' => 'required|max:8',
             'price' => 'required|integer|min:0',
             'quantity' => 'required|integer|min:0',
@@ -64,9 +42,9 @@ class Book
         try {
 
 
-            $book = BookModel::find($array['id']);
+            $book = BookModel::find($book_data['id']);
 
-            $book = $book->fill($array);
+            $book = $book->fill($book_data);
 
             $book->save();
 
@@ -75,7 +53,8 @@ class Book
         catch (\Exception $e) {
             log::error($e->getMessage() . " => on file " . $e->getFile() . " => on line number = " . $e->getLine());
 
-
+            $book = new BookModel;
+            return $book;
         }
     }
 
