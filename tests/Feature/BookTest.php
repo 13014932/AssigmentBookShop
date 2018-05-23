@@ -43,11 +43,11 @@ class BookTest extends TestCase
                 throw new MyException("The Book name may not be greater than 8 characters");
             }
 
-            if(is_int ($book_data['price'] ) == false ) {
+            if(($book_data['price'] ) < 0 ) {
                 throw new MyException("The price must be at least 1");
             }
-            if(is_int ($book_data['quantity'] ) == false ) {
-                throw new MyException("The quantity must be at least 1");
+            if(($book_data['quantity'] ) < 0 ) {
+                throw new \Exception("The quantity must be at least 1");
             }
             BookLib::createBook($book_data);
         }
@@ -55,10 +55,7 @@ class BookTest extends TestCase
         catch (MyException $e) {
             echo $e->errorMessage();
         }
-
-        catch(MyException $e) {
-            echo $e->getMessage();
-        }
+       
         catch(\Exception $e) {
             echo $e->getMessage();
         }
@@ -70,7 +67,7 @@ class BookTest extends TestCase
 ////            $book_name = 'varun';
 //            $book_data = ['name' => 'varun', 'price' => 1, 'quantity' => 1];
 //
-////    *comment        $this->assertLessThanOrEqual(8, strlen($book_name));
+////    *sub-comment        $this->assertLessThanOrEqual(8, strlen($book_name));
 //
 //            $validator = Validator::make($book_data, [
 //                'name' => 'required|max:8',
@@ -83,9 +80,9 @@ class BookTest extends TestCase
 //
 //                $errors = $validator->errors()->all();
 //
-////        *comment       log::info(implode(" ",$errors)) ;
+////      *sub-comment        log::info(implode(" ",$errors)) ;
 ////
-////         *comment      $this->fail( "error 101" );
+////      *sub-comment       $this->fail( "error 101" );
 //                throw new \Exception (implode(" ", $errors));
 //            }
 //
@@ -94,8 +91,8 @@ class BookTest extends TestCase
 //
 //        } catch (\Exception $e) {
 //
-////       *comment    $this->assertEquals( "error in validate", $e->getMessage());
-////        *comment   log::error($e->getMessage());
+////     *sub-comment    $this->assertEquals( "error in validate", $e->getMessage());
+////     *sub-comment    log::error($e->getMessage());
 //            echo $e->getMessage();
 //
 //        }
