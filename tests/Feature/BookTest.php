@@ -10,95 +10,78 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Lib\Crud\Book as BookLib;
 use Illuminate\Support\Facades\Validator;
 
-class MyException extends \Exception
-{
-    public function errorMessage()
-    {
-        //error message
 
-        $errorMsg = ' Error => ' . $this->getMessage() ;
-        return $errorMsg;
+class SomeClass
+{
+    public function doSomething()
+    {
+        // Do something.
     }
 }
 class BookTest extends TestCase
 
 {
+
     /**
      * A basic test example.
      *
      * @return void
      */
 
-    //multiple catches
+    // withConsecutive() method
     //method to test NEW BOOK
     public function testCreateBook()
     {
 
-        $book_data = ['name' => 'varun', 'price' => 1, 'quantity' => 1];
+        $book_data = ['name' => 'varun', 'price' => -1.2, 'quantity' => 1, 'author_name' => ''];
 
-        try {
+        $mock = $this->getMockBuilder(BookLib::class)
+            ->setMethods(['set'])
+            ->getMock();
 
-            if(strlen($book_data['name']) > 8) {
+        $mock->expects($this->exactly(4))
+            ->method('set')
+            ->withConsecutive(
+                [$this->lessThanOrEqual(8)],
+                [$this->greaterThan(0)],
+                [$this->greaterThan(0)],
+                [$this->equalTo('')]
+            );
 
-                throw new MyException("The Book name may not be greater than 8 characters");
-            }
-
-            if(($book_data['price'] ) < 0 ) {
-                throw new MyException("The price must be at least 1");
-            }
-            if(($book_data['quantity'] ) < 0 ) {
-                throw new \Exception("The quantity must be at least 1");
-            }
-            BookLib::createBook($book_data);
-        }
-
-        catch (MyException $e) {
-            echo $e->errorMessage();
-        }
-       
-        catch(\Exception $e) {
-            echo $e->getMessage();
-        }
-
-        /*  below code  with laravel validation (commented)*/
-
-//        try {
-//
-////            $book_name = 'varun';
-//            $book_data = ['name' => 'varun', 'price' => 1, 'quantity' => 1];
-//
-////    *sub-comment        $this->assertLessThanOrEqual(8, strlen($book_name));
-//
-//            $validator = Validator::make($book_data, [
-//                'name' => 'required|max:8',
-//                'price' => 'required|integer|min:1',
-//                'quantity' => 'required|integer|min:1',
-//
-//            ]);
-//
-//            if ($validator->fails()) {
-//
-//                $errors = $validator->errors()->all();
-//
-////      *sub-comment        log::info(implode(" ",$errors)) ;
-////
-////      *sub-comment       $this->fail( "error 101" );
-//                throw new \Exception (implode(" ", $errors));
-//            }
-//
-//            BookLib::createBook($book_data);
-//
-//
-//        } catch (\Exception $e) {
-//
-////     *sub-comment    $this->assertEquals( "error in validate", $e->getMessage());
-////     *sub-comment    log::error($e->getMessage());
-//            echo $e->getMessage();
-//
-//        }
+        $mock->set(strlen($book_data['name']));
+        $mock->set($book_data['price']);
+        $mock->set($book_data['quantity']);
+        $mock->set($book_data['author_name']);
 
 
-    }
+        // Stubbing a method call to return the value from a map
+        // Create a stub for the SomeClass class.
+
+//        $stub = $this->createMock(SomeClass::class);
+//
+//        // Create a map of arguments to return values.
+//        $map = [
+//            ['a', 'c', 'd'],
+//            ['e', 'f', 'g', 'h']
+//        ];
+//
+//        // Configure the stub.
+//        $stub->method('doSomething')
+//            ->will($this->returnValueMap($map));
+//
+//        // $stub->doSomething() returns different values depending on
+//        // the provided arguments.
+//        $this->assertSame('d', $stub->doSomething('a', 'c'));
+//        $this->assertSame('h', $stub->doSomething('e', 'f', 'g'));
+
+
+
+
+
+//
+        BookLib::createBook($book_data);
+
+         }
 
 
 //method to test update BOOK
