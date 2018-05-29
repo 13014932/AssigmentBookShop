@@ -33,7 +33,7 @@ class BookTest extends TestCase
     public function testCreateBook()
     {
 
-//        $book_data = ['name' => 'varun', 'price' => 1.2, 'quantity' => 1, 'author_name' => ''];
+        $book_data = ['name' => 'varun', 'price' => 1.2, 'quantity' => 1, 'author_name' => ''];
 
 
         /*
@@ -41,44 +41,44 @@ class BookTest extends TestCase
          using closures ...done   ******************************************************/
 
 
-        //        $closure = function ($name) {
+//                $closure = function ($name) {
+//
+//
+//                    $compare = $name;
+//                    switch ($compare) {
+//                        case 'name':
+//                            return 'surname';
+//                            break;
+//                        case 'varun':
+//                            return 'batra';
+//                            break;
+//                        case 'satpal':
+//                            return 'khatana';
+//                            break;
+//                        default:
+//                            return false;
+//                            break;
+//                    }
+//                };
+//
+//                $test =$this->getMockBuilder(SomeClass::class)
+//                    ->setMethods(['set'])
+//                    ->getMock();
+//
+//
+//                $test->expects($this->any())
+//                    ->method('set')
+//                    ->will($this->returnCallback($closure));
+//
+//                $this->assertEquals($test->set('name'), 'surname');
+//                $this->assertEquals($test->set('varun'), 'batra');
+//                $this->assertEquals($test->set('satpal'), 'khatana');
+//                $this->assertFalse($test->set('default'));
 
-        //
-        //            $compare = $name;
-        //            switch ($compare) {
-        //                case 'name':
-        //                    return 'surname';
-        //                    break;
-        //                case 'varun':
-        //                    return 'batra';
-        //                    break;
-        //                case 'satpal':
-        //                    return 'khatana';
-        //                    break;
-        //                default:
-        //                    return false;
-        //                    break;
-        //            }
-        //        };
-        //
-        //        $test =$this->getMockBuilder(SomeClass::class)
-        //            ->setMethods(['set'])
-        //            ->getMock();
-        //
-        //
-        //        $test->expects($this->any())
-        //            ->method('set')
-        //            ->will($this->returnCallback($closure));
-        //
-        //        $this->assertEquals($test->set('name'), 'surname');
-        //        $this->assertEquals($test->set('varun'), 'batra');
-        //        $this->assertEquals($test->set('satpal'), 'khatana');
-        //        $this->assertFalse($test->set('default'));
 
 
-                /*
-                 *
-                   withConsecutive() method... done      ***********************************************************************/
+/*****                   withConsecutive() method... done      ***********************************************************************/
+
 
 
 //        $mock = $this->getMockBuilder(BookLib::class)
@@ -103,28 +103,28 @@ class BookTest extends TestCase
 
         /*
          *
-        with- Stubbing a method call to return the value from a map...done  ****
-        **************************************************************/
+        with- Stubbing a method call to return the value from a map...done  ******************************************************************/
+
 
 
         // Create a stub for the SomeClass class.
 
-        $stub = $this->createMock(SomeClass::class);
-
-        // Create a map of arguments to return values.
-        $map = [
-            ['satpal', 'name'],
-            ['e', 'f', 'g', 'h']
-        ];
-
-        // Configure the stub.
-        $stub->method('doSomething')
-            ->will($this->returnValueMap($map));
-
-        // $stub->doSomething() returns different values depending on
-        // the provided arguments.
-        $this->assertSame('name', $stub->doSomething('satpal'));
-        $this->assertSame('h', $stub->doSomething('e', 'f', 'g'));
+//        $stub = $this->createMock(SomeClass::class);
+//
+//        // Create a map of arguments to return values.
+//        $map = [
+//            ['satpal', 'name'],
+//            ['e', 'f', 'g', 'h']
+//        ];
+//
+//        // Configure the stub.
+//        $stub->method('doSomething')
+//            ->will($this->returnValueMap($map));
+//
+//        // $stub->doSomething() returns different values depending on
+//        // the provided arguments.
+//        $this->assertSame('name', $stub->doSomething('satpal'));
+//        $this->assertSame('h', $stub->doSomething('e', 'f', 'g'));
 
 
 
